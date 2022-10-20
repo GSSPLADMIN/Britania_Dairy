@@ -1,0 +1,13 @@
+D:\BRITANIA\Britania_Dairy-branch_V2.0\Britania_Dairy-branch_V2.0\Powder_MISProduct.BL\bin\Release\Powder_MISProduct.BL.dll
+D:\BRITANIA\Britania_Dairy-branch_V2.0\Britania_Dairy-branch_V2.0\Powder_MISProduct.BL\bin\Release\Powder_MISProduct.BL.pdb
+D:\BRITANIA\Britania_Dairy-branch_V2.0\Britania_Dairy-branch_V2.0\Powder_MISProduct.BL\bin\Release\Powder_MISProduct.BO.dll
+D:\BRITANIA\Britania_Dairy-branch_V2.0\Britania_Dairy-branch_V2.0\Powder_MISProduct.BL\bin\Release\Powder_MISProduct.Common.dll
+D:\BRITANIA\Britania_Dairy-branch_V2.0\Britania_Dairy-branch_V2.0\Powder_MISProduct.BL\bin\Release\Powder_MISProduct.DataAccess.dll
+D:\BRITANIA\Britania_Dairy-branch_V2.0\Britania_Dairy-branch_V2.0\Powder_MISProduct.BL\bin\Release\Powder_MISProduct.BO.pdb
+D:\BRITANIA\Britania_Dairy-branch_V2.0\Britania_Dairy-branch_V2.0\Powder_MISProduct.BL\bin\Release\Powder_MISProduct.Common.pdb
+D:\BRITANIA\Britania_Dairy-branch_V2.0\Britania_Dairy-branch_V2.0\Powder_MISProduct.BL\bin\Release\Powder_MISProduct.DataAccess.pdb
+D:\BRITANIA\Britania_Dairy-branch_V2.0\Britania_Dairy-branch_V2.0\Powder_MISProduct.BL\obj\Release\Powder_MISProduct.BL.csproj.AssemblyReference.cache
+D:\BRITANIA\Britania_Dairy-branch_V2.0\Britania_Dairy-branch_V2.0\Powder_MISProduct.BL\obj\Release\Powder_MISProduct.BL.csproj.CoreCompileInputs.cache
+D:\BRITANIA\Britania_Dairy-branch_V2.0\Britania_Dairy-branch_V2.0\Powder_MISProduct.BL\obj\Release\Powder_MISProduct.BL.csproj.CopyComplete
+D:\BRITANIA\Britania_Dairy-branch_V2.0\Britania_Dairy-branch_V2.0\Powder_MISProduct.BL\obj\Release\Powder_MISProduct.BL.dll
+D:\BRITANIA\Britania_Dairy-branch_V2.0\Britania_Dairy-branch_V2.0\Powder_MISProduct.BL\obj\Release\Powder_MISProduct.BL.pdb

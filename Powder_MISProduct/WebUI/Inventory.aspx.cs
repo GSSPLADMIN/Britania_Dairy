@@ -5,6 +5,7 @@ using Powder_MISProduct.BL;
 using Powder_MISProduct.BO;
 using Powder_MISProduct.Common;
 using log4net;
+using System.Globalization;
 
 namespace Powder_MISProduct.WebUI
 {
@@ -73,7 +74,7 @@ namespace Powder_MISProduct.WebUI
                     objInventoryBO.BatchNumber = txtPartNo.Text.Trim();
                     objInventoryBO.Quantity = Convert.ToInt32(txtQuantity.Text.Trim());
                     objInventoryBO.Remarks = txtRemarks.Text.Trim();
-                    objInventoryBO.Date = txtDate.Text;
+                    objInventoryBO.Date = DateTime.ParseExact(txtDate.Text.Trim() + " 00:00:00", "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
                    
                     if (ViewState["Mode"].ToString() == "Save")
                     {
@@ -205,6 +206,7 @@ namespace Powder_MISProduct.WebUI
             {
                 ClearAll();
                 PanelVisibilityMode(2);
+                txtDate.Text = DateTime.Today.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
                 //divIsResignDate.Visible = false;
             }
             catch (Exception ex)

@@ -20,11 +20,11 @@ namespace Powder_MISProduct.BL
         /// <summary>
 
         /// </summary>
-        public ApplicationResult ChemicalConsumption(DateTime FromDatetime, DateTime ToDatetime)
+        public ApplicationResult ChemicalConsumption(DateTime FromDatetime, DateTime ToDatetime,int shiftNo)
         {
             try
             {
-                pSqlParameter = new SqlParameter[2];
+                pSqlParameter = new SqlParameter[3];
 
                 pSqlParameter[0] = new SqlParameter("@FromDate", SqlDbType.DateTime);
                 pSqlParameter[0].Direction = ParameterDirection.Input;
@@ -33,6 +33,10 @@ namespace Powder_MISProduct.BL
                 pSqlParameter[1] = new SqlParameter("@ToDate", SqlDbType.DateTime);
                 pSqlParameter[1].Direction = ParameterDirection.Input;
                 pSqlParameter[1].Value = ToDatetime;
+
+                pSqlParameter[2] = new SqlParameter("@ShiftNo", SqlDbType.Int);
+                pSqlParameter[2].Direction = ParameterDirection.Input;
+                pSqlParameter[2].Value = shiftNo;
 
 
 

@@ -53,6 +53,8 @@
     <Compile Include="RWSTStorageBO.cs" />
     <Compile Include="ScreenBo.cs" />
     <Compile Include="ShiftBo.cs" />
+    <Compile Include="TankLabReportBO.cs" />
+    <Compile Include="UtilityConsumptionCostBO.cs" />
     <Compile Include="WheyAnalysisBO.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -20,10 +20,17 @@ namespace Powder_MISProduct.ReportUI
 {
     public partial class PastwheyStorage : System.Web.UI.Page
     {
+        #region Load page event
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                divExport.Visible = false;
+                txtFromDate.Text = DateTime.Today.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+                txtToDate.Text = DateTime.Today.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+            }
         }
+        #endregion
 
         #region VerifyRenderingInServerForm
         public override void VerifyRenderingInServerForm(Control control)
@@ -43,20 +50,33 @@ namespace Powder_MISProduct.ReportUI
                   CultureInfo.InvariantCulture);
                 DateTime dtToDateTime = DateTime.ParseExact(txtToDate.Text + " " + txtToTime.Text, "dd/MM/yyyy HH:mm:ss",
                     CultureInfo.InvariantCulture);
-                objResult = objPastWheyStorage.PastwheyStorage(dtFromDateTime, dtToDateTime);
-                if (objResult.ResultDt.Rows.Count > 0)
+
+                if (dtFromDateTime <= dtToDateTime)
                 {
-                    gvPastWheyStorage.DataSource = objResult.ResultDt;
-                    gvPastWheyStorage.DataBind();
-                    // imgWordButton.Visible = imgExcelButton.Visible = true;
-                    divNo.Visible = false;
+                    objResult = objPastWheyStorage.PastwheyStorage(dtFromDateTime, dtToDateTime);
+                    if (objResult.ResultDt.Rows.Count > 0)
+                    {
+                        gvPastWheyStorage.DataSource = objResult.ResultDt;
+                        gvPastWheyStorage.DataBind();
+                        // imgWordButton.Visible = imgExcelButton.Visible = true;
+                        divNo.Visible = false;
+                        divExport.Visible = true;
+                        gvPastWheyStorage.Visible = true;
+
+                    }
+                    else
+                    {
+                        // imgWordButton.Visible = imgExcelButton.Visible = false;
+                        divNo.Visible = true;
+                        divExport.Visible = false;
+                        gvPastWheyStorage.Visible = false;
+                    }
                 }
                 else
                 {
-                    // imgWordButton.Visible = imgExcelButton.Visible = false;
-                    divNo.Visible = true;
-                    // ClientScript.RegisterStartupScript(typeof(Page), "MessagePopUp",
-                    //"<script>alert('No Record Found.');</script>");
+                    gvPastWheyStorage.Visible = false;
+                    ClientScript.RegisterStartupScript(typeof(Page), "MessagePopUp",
+                   "<script>alert('You cannot select From Date greater than To Date.');</script>");
                 }
             }
             catch (Exception ex)

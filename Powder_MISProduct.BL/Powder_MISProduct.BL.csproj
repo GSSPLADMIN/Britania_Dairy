@@ -47,11 +47,20 @@
     <Compile Include="CPLBL.cs" />
     <Compile Include="CreamBufferTankBL.cs" />
     <Compile Include="CreamTankStatusBL.cs" />
+    <Compile Include="CrystallizationTankStatus_SCMBL.cs" />
     <Compile Include="EmployeeBl.cs" />
     <Compile Include="EvaporatorBL.cs" />
+    <Compile Include="Evaporator_SCM_DataLogSheetBL.cs" />
     <Compile Include="InventoryBL.cs" />
     <Compile Include="LabBL.cs" />
     <Compile Include="MaintenanceBL.cs" />
+    <Compile Include="MassBalanceForDryerBL.cs" />
+    <Compile Include="MassBalanceForEvaporatorBL.cs" />
+    <Compile Include="MassBalanceForSMP_Report_BL.cs" />
+    <Compile Include="MassBalanceWheyBL.cs" />
+    <Compile Include="MotorDataSheet_ScmBL.cs" />
+    <Compile Include="NFandRO_CIPLog_ReportBL.cs" />
+    <Compile Include="NFandRO_ProdLog_ReportBL.cs" />
     <Compile Include="NFWheyStorageBL.cs" />
     <Compile Include="OrganisationBL.cs" />
     <Compile Include="PastWheyStorageBL.cs" />
@@ -63,8 +72,13 @@
     <Compile Include="ScreenBL.cs" />
     <Compile Include="ShiftBl.cs" />
     <Compile Include="TankerDispatchBL.cs" />
+    <Compile Include="TankLabReportBL.cs" />
+    <Compile Include="Tank_Lab_ReportBL.cs" />
     <Compile Include="TransferBL.cs" />
     <Compile Include="UtilityConsumptionBl.cs" />
+    <Compile Include="UtilityConsumptionCostBL.cs" />
+    <Compile Include="UtilityConsumptionSCMReportBL.cs" />
+    <Compile Include="VacuumCoolerAndEjector_scmBL.cs" />
     <Compile Include="WheyAnalysisBL.cs" />
     <Compile Include="WPLBL.cs" />
   </ItemGroup>

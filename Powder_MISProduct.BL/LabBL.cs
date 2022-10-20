@@ -89,7 +89,7 @@ namespace Powder_MISProduct.BL
                 pSqlParameter[0].Direction = ParameterDirection.Input;
                 pSqlParameter[0].Value = objLabBo.Id;
 
-                pSqlParameter[1] = new SqlParameter("@Date", SqlDbType.NVarChar);
+                pSqlParameter[1] = new SqlParameter("@Date", SqlDbType.DateTime);
                 pSqlParameter[1].Direction = ParameterDirection.Input;
                 pSqlParameter[1].Value = objLabBo.Date;
 
@@ -271,7 +271,7 @@ namespace Powder_MISProduct.BL
                 pSqlParameter[0].Direction = ParameterDirection.Input;
                 pSqlParameter[0].Value = objLabBo.Id;
 
-                pSqlParameter[1] = new SqlParameter("@Date", SqlDbType.NVarChar);
+                pSqlParameter[1] = new SqlParameter("@Date", SqlDbType.DateTime);
                 pSqlParameter[1].Direction = ParameterDirection.Input;
                 pSqlParameter[1].Value = objLabBo.Date;
 
