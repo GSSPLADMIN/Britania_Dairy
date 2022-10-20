@@ -20,10 +20,17 @@ namespace Powder_MISProduct.ReportUI
 {
     public partial class ConcFeedTankStatus : System.Web.UI.Page
     {
+        #region Load page event
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                divExport.Visible = false;
+                txtFromDate.Text = DateTime.Today.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+                txtToDate.Text = DateTime.Today.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+            }
         }
+        #endregion
 
         #region PDFBackgroundHelper Event
         class PDFBackgroundHelper : PdfPageEventHelper
@@ -272,9 +279,9 @@ namespace Powder_MISProduct.ReportUI
                     headerRow2.Controls.Add(headerCell20);
 
                     headerRow2.Controls.Add(headerCell21);
-                    headerRow2.Controls.Add(headerCell22);
-                    headerRow2.Controls.Add(headerCell23);
-                    headerRow2.Controls.Add(headerCell24);
+                    //headerRow2.Controls.Add(headerCell22);
+                   // headerRow2.Controls.Add(headerCell23);
+                   // headerRow2.Controls.Add(headerCell24);
                     //headerRow2.Controls.Add(headerCell25);
                     //headerRow2.Controls.Add(headerCell26);
                     //headerRow2.Controls.Add(headerCell27);
@@ -304,20 +311,31 @@ namespace Powder_MISProduct.ReportUI
                   CultureInfo.InvariantCulture);
                 DateTime dtToDateTime = DateTime.ParseExact(txtToDate.Text + " " + txtToTime.Text, "dd/MM/yyyy HH:mm:ss",
                     CultureInfo.InvariantCulture);
-                objResult = objCreamTankStatus.ConcfeedTankStatusReport(dtFromDateTime, dtToDateTime);
-                if (objResult.ResultDt.Rows.Count > 0)
+                if (dtFromDateTime <= dtToDateTime)
                 {
-                    gvConcfeedTankStatus.DataSource = objResult.ResultDt;
-                    gvConcfeedTankStatus.DataBind();
-                    // imgWordButton.Visible = imgExcelButton.Visible = true;
-                    divNo.Visible = false;
+                    objResult = objCreamTankStatus.ConcfeedTankStatusReport(dtFromDateTime, dtToDateTime);
+                    if (objResult.ResultDt.Rows.Count > 0)
+                    {
+                        gvConcfeedTankStatus.DataSource = objResult.ResultDt;
+                        gvConcfeedTankStatus.DataBind();
+                        // imgWordButton.Visible = imgExcelButton.Visible = true;
+                        divNo.Visible = false;
+                        divExport.Visible = true;
+                        gvConcfeedTankStatus.Visible = true;
+                    }
+                    else
+                    {
+                        divNo.Visible = true;
+                        divExport.Visible = false;
+                        gvConcfeedTankStatus.Visible = false;
+                    }
+
                 }
                 else
                 {
-                    // imgWordButton.Visible = imgExcelButton.Visible = false;
-                    divNo.Visible = true;
-                    // ClientScript.RegisterStartupScript(typeof(Page), "MessagePopUp",
-                    //"<script>alert('No Record Found.');</script>");
+                    gvConcfeedTankStatus.Visible = false;
+                    ClientScript.RegisterStartupScript(typeof(Page), "MessagePopUp",
+                   "<script>alert('You cannot select From Date greater than To Date.');</script>");
                 }
             }
             catch (Exception ex)
@@ -662,7 +680,7 @@ namespace Powder_MISProduct.ReportUI
                         headerCell32.VerticalAlignment = Element.ALIGN_MIDDLE;
                         pdfPTable.AddCell(headerCell32);
 
-                      
+
 
 
 

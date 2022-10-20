@@ -28,11 +28,11 @@ namespace Powder_MISProduct.BL
             {
                 pSqlParameter = new SqlParameter[2];
 
-                pSqlParameter[0] = new SqlParameter("@FromDate", SqlDbType.NVarChar);
+                pSqlParameter[0] = new SqlParameter("@FromDate", SqlDbType.DateTime);
                 pSqlParameter[0].Direction = ParameterDirection.Input;
                 pSqlParameter[0].Value = FromDatetime;
 
-                pSqlParameter[1] = new SqlParameter("@ToDate", SqlDbType.NVarChar);
+                pSqlParameter[1] = new SqlParameter("@ToDate", SqlDbType.DateTime);
                 pSqlParameter[1].Direction = ParameterDirection.Input;
                 pSqlParameter[1].Value = ToDatetime;
 
@@ -89,7 +89,7 @@ namespace Powder_MISProduct.BL
                 pSqlParameter[0].Direction = ParameterDirection.Input;
                 pSqlParameter[0].Value = objInventoryBo.Id;
 
-                pSqlParameter[1] = new SqlParameter("@Date", SqlDbType.NVarChar);
+                pSqlParameter[1] = new SqlParameter("@Date", SqlDbType.DateTime);
                 pSqlParameter[1].Direction = ParameterDirection.Input;
                 pSqlParameter[1].Value = objInventoryBo.Date;
 
@@ -117,7 +117,7 @@ namespace Powder_MISProduct.BL
                 pSqlParameter[7].Direction = ParameterDirection.Input;
                 pSqlParameter[7].Value = objInventoryBo.CreatedBy;
 
-                pSqlParameter[8] = new SqlParameter("@CreatedDate", SqlDbType.VarChar);
+                pSqlParameter[8] = new SqlParameter("@CreatedDate", SqlDbType.DateTime);
                 pSqlParameter[8].Direction = ParameterDirection.Input;
                 pSqlParameter[8].Value = objInventoryBo.CreatedDate;
 
@@ -165,7 +165,7 @@ namespace Powder_MISProduct.BL
                 pSqlParameter[0].Direction = ParameterDirection.Input;
                 pSqlParameter[0].Value = objInventoryBo.Id;
 
-                pSqlParameter[1] = new SqlParameter("@Date", SqlDbType.NVarChar);
+                pSqlParameter[1] = new SqlParameter("@Date", SqlDbType.DateTime);
                 pSqlParameter[1].Direction = ParameterDirection.Input;
                 pSqlParameter[1].Value = objInventoryBo.Date;
 
@@ -191,11 +191,11 @@ namespace Powder_MISProduct.BL
 
                 pSqlParameter[7] = new SqlParameter("@LastModifiedBy", SqlDbType.Int);
                 pSqlParameter[7].Direction = ParameterDirection.Input;
-                pSqlParameter[7].Value = objInventoryBo.CreatedBy;
+                pSqlParameter[7].Value = objInventoryBo.LastModifiedBy;
 
-                pSqlParameter[8] = new SqlParameter("@LastModifiedDate", SqlDbType.VarChar);
+                pSqlParameter[8] = new SqlParameter("@LastModifiedDate", SqlDbType.DateTime);
                 pSqlParameter[8].Direction = ParameterDirection.Input;
-                pSqlParameter[8].Value = objInventoryBo.CreatedDate;
+                pSqlParameter[8].Value = objInventoryBo.LastModifiedDate;
 
 
                 sSql = "usp_Inventory_Update";
@@ -275,7 +275,7 @@ namespace Powder_MISProduct.BL
                 pSqlParameter[1].Direction = ParameterDirection.Input;
                 pSqlParameter[1].Value = intLastModifiedBy;
 
-                pSqlParameter[2] = new SqlParameter("@LastModifiedDate", SqlDbType.VarChar);
+                pSqlParameter[2] = new SqlParameter("@LastModifiedDate", SqlDbType.DateTime);
                 pSqlParameter[2].Direction = ParameterDirection.Input;
                 pSqlParameter[2].Value = strLastModifiedDate;
 

@@ -21,7 +21,10 @@ namespace Powder_MISProduct
                 lblMsg.Visible = false;
                 if (Session[ApplicationSession.Userid] != null)
                 {
-                    Response.Redirect("WebUI/Home.aspx", false);
+                    //Response.Redirect("WebUI/Home.aspx", false);
+                    //Changed by Farheen, since there is no Home.aspx page therefore user must 
+                    //get redirect to the home page i.e. Dashboard.aspx 
+                    Response.Redirect("WebUI/Dashboard.aspx", false);
                 }
             }
             catch (Exception ex)

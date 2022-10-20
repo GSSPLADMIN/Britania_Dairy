@@ -1,8 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/MainMaster.Master" AutoEventWireup="true" CodeBehind="UtilityConsumption.aspx.cs" Inherits="Powder_MISProduct.ReportUI.UtilityConsumption" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-      <div id="breadcrumb">
+    <div id="breadcrumb">
         <ul class="breadcrumb">
             <li><i class="fa fa-home"></i><a href="../WebUI/DashBoard.aspx">Home</a></li>
             <li class="active">Utility Consumption Report</li>
@@ -83,41 +84,52 @@
                 <br />
                 <div class="row">
                     <div class="col-md-12" style="overflow: scroll">
-                     <asp:GridView runat="server" ID="gvUtilityConsumption"
+                         
+                        <asp:GridView ID="gvUtilityConsumption" runat="server" GridLines="Both" 
+                        AutoGenerateColumns="true" HeaderStyle-Wrap="false"
+                        Width="100%" ShowHeader="false"
+                        OnRowCreated="gvUtilityConsumption_RowCreated"
+                        HeaderStyle-Font-Size="Medium" CssClass="table table-striped" 
+                        HeaderStyle-HorizontalAlign="Center" >
+                        <RowStyle HorizontalAlign="Center"  Width="100%"/>
+                         </asp:GridView>  
+                    <%-- <asp:GridView runat="server" ID="gvUtilityConsumption"
                         AutoGenerateColumns="False" GridLines="Both" HeaderStyle-Wrap="false"
-                        HeaderStyle-Font-Size="Medium" CssClass="gvTheGrid striped" OnPreRender="gvUtilityConsumption_PreRender">
-<%--                        <RowStyle HorizontalAlign="Center"  Width="100%"/>--%>
+                        HeaderStyle-Font-Size="Medium" CssClass="table table-striped">
                            <Columns>
-<%--                            <asp:BoundField DataField="EndId" HeaderText="EndId"  ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden"/>--%>
                             <asp:BoundField DataField="SrNo" HeaderText="Sr No" ItemStyle-Wrap="false" />
                             <asp:BoundField DataField="Date" HeaderText="Date" ItemStyle-Wrap="false" />
                             <asp:BoundField DataField="Time" HeaderText="Time" ItemStyle-Wrap="false" />
-                            <asp:BoundField DataField="MCC1WheyProcesses" HeaderText="MCC1WheyProcesses" ItemStyle-Wrap="false" />
-                            <asp:BoundField DataField="MCC2Evaporator" HeaderText="MCC2Evaporator" ItemStyle-Wrap="false" />
-                            <asp:BoundField DataField="MCC3Dryer" HeaderText="MCC3Dryer" ItemStyle-Wrap="false" />
-                            <asp:BoundField DataField="MCC4SCM" HeaderText="MCC4SCM" ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>
-                           <asp:BoundField DataField="TotalPowerConsumption" HeaderText="TotalPowerConsumption" ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>                                             
-                            <asp:BoundField DataField="SteamConsumptioninWheyPlant" HeaderText="SteamConsumptioninWheyPlant" ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>
-                            <asp:BoundField DataField="SteamConsumptioninEvaporator" HeaderText="SteamConsumptioninEvaporator " ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>
-                            <asp:BoundField DataField="HPSteamConsumptioninDryer" HeaderText="HPSteamConsumptioninDryer" ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>
-                            <asp:BoundField DataField="SteamConsumptionindryerothers" HeaderText="SteamConsumptionindryerothers" ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>
-                            <asp:BoundField DataField="TotalSteamConsumption" HeaderText="TotalSteamConsumption" ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>       
-                            <asp:BoundField DataField="ChilledWaterinWheyProcessing" HeaderText="ChilledWaterinWheyProcessing" ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>     
-                            <asp:BoundField DataField="ChilledWaterinpowderplant" HeaderText="ChilledWaterinpowderplant" ItemStyle-Wrap="false" />
-                            <asp:BoundField DataField="Chilledwaterinlettemp" HeaderText="Chilledwaterinlettemp" ItemStyle-Wrap="false" />
-                            <asp:BoundField DataField="ChilledwaterOutlettemp" HeaderText="ChilledwaterOutlettemp" ItemStyle-Wrap="false" />
-                             <asp:BoundField DataField="TotalChilledWaterConsumption" HeaderText="TotalChilledWaterConsumption" ItemStyle-Wrap="false" />
-                            <asp:BoundField DataField="SoftWater" HeaderText="SoftWater" ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>
-                            <asp:BoundField DataField="ROWater" HeaderText="ROWater" ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>
-                            <asp:BoundField DataField="CompressedAir" HeaderText="CompressedAir " ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>
-                            <asp:BoundField DataField="RawWater" HeaderText="RawWater" ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>
+                            <asp:BoundField DataField="MCC1WheyProcesses" HeaderText="MCC1 Whey Processes (kVAh)" ItemStyle-Wrap="false" />
+                            <asp:BoundField DataField="MCC2Evaporator" HeaderText="MCC2 Evaporator (kVAh)" ItemStyle-Wrap="false" />
+                            <asp:BoundField DataField="MCC3Dryer" HeaderText="MCC3 Dryer (kVAh)" ItemStyle-Wrap="false" />
+                           <asp:BoundField DataField="TotalPowerConsumption" HeaderText="Total Power Consumption (KW)" ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>                                             
+                           <asp:BoundField DataField="SubPCC" HeaderText="Sub PCC (kVAh)" ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>
+                           <asp:BoundField DataField="SteamConsumptioninWheyPlant" HeaderText="Steam Consumption in Whey Plant (Kg)" ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>
+                           <asp:BoundField DataField="SteamConsumptioninEvaporator" HeaderText="Steam Consumption in Evaporator (Kg)" ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>
+                           <asp:BoundField DataField="HPSteamConsumptioninDryer" HeaderText="HP Steam Consumption in Dryer (Kg)" ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>
+                           <asp:BoundField DataField="SteamConsumptionindryerothers" HeaderText="Steam Consumption in Dryer LP (Kg)" ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>
+                           <asp:BoundField DataField="TotalSteamConsumption" HeaderText="Total Steam Consumption (Kg)" ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>       
+                           <asp:BoundField DataField="ChilledWaterinWheyProcessing" HeaderText="Chilled Water in Whey Processing Area (Ltr/day)" ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>     
+                           <asp:BoundField DataField="ChilledWaterinpowderplant" HeaderText="Chilled Water in Powder Plant (Ltr/day)" ItemStyle-Wrap="false" />
+                           <asp:BoundField DataField="Chilledwaterinlettemp" HeaderText="Chilled Water Inlet Temp (°C)" ItemStyle-Wrap="false" />
+                           <asp:BoundField DataField="ChilledwaterOutlettemp" HeaderText="Chilled Water Outlet Temp (°C)" ItemStyle-Wrap="false" />
+                           <asp:BoundField DataField="AverageTemp" HeaderText="Average Temp (°C)" ItemStyle-Wrap="false" />
+                           <asp:BoundField DataField="CHWConsumptionWheyPlant" HeaderText="CHW Consumption in TR Whey Plant" ItemStyle-Wrap="false" />
+                           <asp:BoundField DataField="CHWConsumptionPP" HeaderText="CHW Consumption in TR PP" ItemStyle-Wrap="false" />
+                            <asp:BoundField DataField="SoftWater" HeaderText="Soft Water (Ltr/day)" ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>
+                            <asp:BoundField DataField="ROWater" HeaderText="RO Water (Ltr/day)" ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>
+                            <asp:BoundField DataField="CompressedAir" HeaderText="Compressed Air (Ltr/day)" ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>
+                            <asp:BoundField DataField="RawWater" HeaderText="Raw Water (Ltr/day)" ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>
+                            <asp:BoundField DataField="PowderProduced" HeaderText="Powder Produced (Kg)" ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>
                             <asp:BoundField DataField="Remarks" HeaderText="Remarks" ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>
                         </Columns>
-                         </asp:GridView>
+                         </asp:GridView>--%>
 
                     </div>
-                </div>
-                <div class="col-md-12 center" id="divNo" runat="server">No records found.</div>
+               
+    </div>
+    <div class="col-md-12 center" id="divNo" runat="server">No records found.</div>
             </div>
         </div>
     </div>

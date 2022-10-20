@@ -18,9 +18,6 @@ namespace Powder_MISProduct.BL
         #endregion
 
         #region NFWhey Storage Status Log Report
-        /// <summary>
-
-        /// </summary>
         public ApplicationResult NFwheyStorage(DateTime FromDatetime, DateTime ToDatetime)
         {
             try

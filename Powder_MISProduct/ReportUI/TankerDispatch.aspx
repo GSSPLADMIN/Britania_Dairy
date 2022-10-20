@@ -83,16 +83,24 @@
                 <br />
                 <div class="row">
                     <div class="col-md-12" style="overflow: scroll">
-                     <asp:GridView runat="server" ID="gvTankerDispatch"
+                        <asp:GridView ID="gvTankerDispatch" runat="server" GridLines="Both" 
+                        AutoGenerateColumns="true" HeaderStyle-Wrap="false"
+                        Width="100%" ShowHeader="false"
+                        OnRowCreated="gvTankerDispatch_RowCreated" OnPreRender="gvTankerDispatch_PreRender"
+                        HeaderStyle-Font-Size="Medium" CssClass="table table-striped" 
+                        HeaderStyle-HorizontalAlign="Center" >
+                        <RowStyle HorizontalAlign="Center"  Width="100%"/>
+                         </asp:GridView>
+                     <%--<asp:GridView runat="server" ID="gvTankerDispatch"
                         AutoGenerateColumns="False" GridLines="Both" HeaderStyle-Wrap="false"
                         HeaderStyle-Font-Size="Medium" CssClass="gvTheGrid striped" OnPreRender="gvTankerDispatch_PreRender">
-<%--                        <RowStyle HorizontalAlign="Center"  Width="100%"/>--%>
+
                            <Columns>
                             <asp:BoundField DataField="EndId" HeaderText="EndId"  ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden"/>
                             <asp:BoundField DataField="SrNo" HeaderText="Sr No." ItemStyle-Wrap="false" />
                             <asp:BoundField DataField="Shift" HeaderText="Shift" ItemStyle-Wrap="false" />
                             <asp:BoundField DataField="Date" HeaderText="Date" ItemStyle-Wrap="false" />
-<%--                            <asp:BoundField DataField="Time" HeaderText="Time" ItemStyle-Wrap="false" />--%>
+
                             <asp:BoundField DataField="StartTime" HeaderText="StartTime" ItemStyle-Wrap="false" />
                             <asp:BoundField DataField="StopTime" HeaderText="StopTime" ItemStyle-Wrap="false" />
                             <asp:BoundField DataField="TransferTime" HeaderText="TransferTime" ItemStyle-Wrap="false" />
@@ -106,7 +114,7 @@
 
                         
                         </Columns>
-                         </asp:GridView>
+                         </asp:GridView>--%>
 
                     </div>
                 </div>

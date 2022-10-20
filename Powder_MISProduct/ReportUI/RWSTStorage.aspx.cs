@@ -20,10 +20,18 @@ namespace Powder_MISProduct.ReportUI
 {
     public partial class RWSTStorage : System.Web.UI.Page
     {
+        #region Load page event
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                divExport.Visible = false;
+                txtFromDate.Text = DateTime.Today.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+                txtToDate.Text = DateTime.Today.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+            }
         }
+        #endregion
+
         #region VerifyRenderingInServerForm
         public override void VerifyRenderingInServerForm(Control control)
         {
@@ -42,32 +50,43 @@ namespace Powder_MISProduct.ReportUI
                   CultureInfo.InvariantCulture);
                 DateTime dtToDateTime = DateTime.ParseExact(txtToDate.Text + " " + txtToTime.Text, "dd/MM/yyyy HH:mm:ss",
                     CultureInfo.InvariantCulture);
-                objResult = objRwstStorage.RWSTStorageReport(dtFromDateTime, dtToDateTime);
-                if (objResult.ResultDt.Rows.Count > 0)
+
+                if (dtFromDateTime <= dtToDateTime)
                 {
-                    gvRWSTStorage.DataSource = objResult.ResultDt;
-                    gvRWSTStorage.DataBind();
-                   // imgWordButton.Visible = imgExcelButton.Visible = true;
-                    divNo.Visible = false;
+                    objResult = objRwstStorage.RWSTStorageReport(dtFromDateTime, dtToDateTime);
+                    if (objResult.ResultDt.Rows.Count > 0)
+                    {
+                        gvRWSTStorage.DataSource = objResult.ResultDt;
+                        gvRWSTStorage.DataBind();
+                        // imgWordButton.Visible = imgExcelButton.Visible = true;
+                        divNo.Visible = false;
+                        divExport.Visible = true;
+                        gvRWSTStorage.Visible = true;
+                    }
+                    else
+                    {
+                        divNo.Visible = true;
+                        divExport.Visible = false;
+                        gvRWSTStorage.Visible = false;
+                    }
                 }
                 else
                 {
-                   // imgWordButton.Visible = imgExcelButton.Visible = false;
-                    divNo.Visible = true;
-                    // ClientScript.RegisterStartupScript(typeof(Page), "MessagePopUp",
-                    //"<script>alert('No Record Found.');</script>");
+                    gvRWSTStorage.Visible = false;
+                    ClientScript.RegisterStartupScript(typeof(Page), "MessagePopUp",
+                   "<script>alert('You cannot select From Date greater than To Date.');</script>");
                 }
             }
             catch (Exception ex)
             {
-               // log.Error("Error", ex);
+                // log.Error("Error", ex);
                 ClientScript.RegisterStartupScript(typeof(Page), "MessagePopUp",
                    "<script>alert('Oops! There is some technical Problem. Contact to your Administrator.');</script>");
             }
         }
         #endregion
 
-      
+
 
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
@@ -163,7 +182,7 @@ namespace Powder_MISProduct.ReportUI
                         pdfPTable.AddCell(headerCell3);
 
 
-                     
+
 
 
 
@@ -432,7 +451,7 @@ namespace Powder_MISProduct.ReportUI
                         writer.PageEvent = pageEventHelper;
                         pdfDoc.Open();
                         htmlparser.Parse(sr);
-                          pdfDoc.Add(jpg);
+                        pdfDoc.Add(jpg);
                         pdfDoc.Add(jpg1);
                         pdfDoc.Add(pdfPTable);
 
@@ -464,7 +483,7 @@ namespace Powder_MISProduct.ReportUI
             }
             catch (Exception ex)
             {
-               // log.Error("Error", ex);
+                // log.Error("Error", ex);
                 ClientScript.RegisterStartupScript(typeof(Page), "MessagePopUp",
                     "<script>alert('Oops! There is some technical Problem. Contact to your Administrator.');</script>");
             }
@@ -563,7 +582,7 @@ namespace Powder_MISProduct.ReportUI
             }
             catch (Exception ex)
             {
-               // log.Error("Button EXCEL", ex);
+                // log.Error("Button EXCEL", ex);
                 ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Oops! There is some technical issue. Please Contact to your administrator.');", true);
             }
         }
@@ -607,7 +626,7 @@ namespace Powder_MISProduct.ReportUI
                     headerTableCell.Text = "W12T01";
                     headerRow1.Controls.Add(headerTableCell);
 
-                    
+
 
 
 

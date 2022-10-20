@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -24,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>4.3</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,14 +46,38 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="itextsharp">
-      <HintPath>..\..\..\Dairy_MIS_Product\Dairy_MIS\bin\itextsharp.dll</HintPath>
+    <Reference Include="Antlr4.Runtime, Version=4.5.0.0, Culture=neutral, PublicKeyToken=09abb75b9ed49849, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr4.Runtime.4.5.3\lib\net45\Antlr4.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="itextsharp.xmlworker">
-      <HintPath>..\..\..\Dairy_MIS_Product\Dairy_MIS\bin\itextsharp.xmlworker.dll</HintPath>
+    <Reference Include="AspNet.ScriptManager.bootstrap, Version=4.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AspNet.ScriptManager.bootstrap.4.6.0\lib\net45\AspNet.ScriptManager.bootstrap.dll</HintPath>
     </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\..\..\Amul\GEA_AmulFed_Powder-master\GEA_AMULFED\bin\log4net.dll</HintPath>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.6.1\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.3.4.1\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.licensekey, Version=3.1.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.licensekey.3.1.1\lib\net40\itext.licensekey.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.2\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xfaworker, Version=5.5.13.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itextsharp.xfaworker.5.5.13.2\lib\net40\itextsharp.xfaworker.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker, Version=5.5.13.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itextsharp.xmlworker.5.5.13.2\lib\itextsharp.xmlworker.dll</HintPath>
+    </Reference>
+    <Reference Include="Jint, Version=0.9.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itextsharp.xfaworker.5.5.13.2\lib\net40\Jint.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.14.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.14\lib\net45\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -73,9 +99,6 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="AspNet.ScriptManager.bootstrap">
-      <HintPath>..\packages\AspNet.ScriptManager.bootstrap.3.3.7\lib\net45\AspNet.ScriptManager.bootstrap.dll</HintPath>
     </Reference>
     <Reference Include="AspNet.ScriptManager.jQuery">
       <HintPath>..\packages\AspNet.ScriptManager.jQuery.3.3.1\lib\net45\AspNet.ScriptManager.jQuery.dll</HintPath>
@@ -123,8 +146,10 @@
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-datepicker.min.css" />
     <Content Include="Content\bootstrap-datepicker3.min.css" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap-timepicker.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -169,16 +194,13 @@
     <Content Include="css\style.css" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\font-awesome\css\font-awesome.css" />
+    <Content Include="fonts\font-awesome\css\font-awesome.min.css" />
+    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\font-awesome\HELP-US-OUT.txt" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="images\1.jpg" />
     <Content Include="images\2.jpg" />
     <Content Include="images\3.jpg" />
@@ -318,43 +340,195 @@
     <Content Include="Content\_bootstrap-datetimepicker.less" />
     <Content Include="ReportUI\ChemicalConsumption.aspx" />
     <Content Include="ReportUI\CIP.aspx" />
+    <Content Include="ReportUI\CIP_2.aspx" />
+    <Content Include="ReportUI\CIP_3.aspx" />
     <Content Include="ReportUI\ConcFeedTankStatus.aspx" />
     <Content Include="ReportUI\CPLLog.aspx" />
     <Content Include="ReportUI\CreamBufferTankStatus.aspx" />
     <Content Include="ReportUI\CreamTankStatus.aspx" />
     <Content Include="ReportUI\CrystallizationTankStatus.aspx" />
+    <Content Include="ReportUI\CrystallizationTankStatus_SCM.aspx" />
     <Content Include="ReportUI\DryerDataLog.aspx" />
     <Content Include="ReportUI\EvaporatorLog.aspx" />
+    <Content Include="ReportUI\Evaporator_SCM_DataLogSheetReport.aspx" />
     <Content Include="ReportUI\InventoryReport.aspx" />
     <Content Include="ReportUI\LabReport.aspx" />
     <Content Include="ReportUI\MaintenanceReport.aspx" />
+    <Content Include="ReportUI\MassBalanceForDryer.aspx" />
+    <Content Include="ReportUI\MassBalanceForEvaporator.aspx" />
+    <Content Include="ReportUI\MassBalanceForSMP.aspx" />
+    <Content Include="ReportUI\MassBalanceWhey.aspx" />
+    <Content Include="ReportUI\MotorDataSheet_SCM.aspx" />
+    <Content Include="ReportUI\NFandRO_CIPLog_Report.aspx" />
+    <Content Include="ReportUI\NFandRO_ProdLog_Report.aspx" />
     <Content Include="ReportUI\NFWheyStorage.aspx" />
     <Content Include="ReportUI\PastwheyStorage.aspx" />
     <Content Include="ReportUI\ROPermeateStatus.aspx" />
     <Content Include="ReportUI\RWSTStorage.aspx" />
     <Content Include="ReportUI\TankerDispatch.aspx" />
+    <Content Include="ReportUI\Tank_Lab_report.aspx" />
     <Content Include="ReportUI\Transfer.aspx" />
     <Content Include="ReportUI\UtilityConsumption.aspx" />
+    <Content Include="ReportUI\UtilityConsumptionSCMReport.aspx" />
+    <Content Include="ReportUI\VacuumCoolerAndEjector_SCM.aspx" />
     <Content Include="ReportUI\WheyAnalysisReport.aspx" />
     <Content Include="ReportUI\WPLLog.aspx" />
+    <Content Include="Scripts\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\CommonFunction.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery.quicksearch.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\src\index.js" />
+    <Content Include="Scripts\src\methods\defaults.js" />
+    <Content Include="Scripts\src\methods\destroy.js" />
+    <Content Include="Scripts\src\methods\disableEventListeners.js" />
+    <Content Include="Scripts\src\methods\enableEventListeners.js" />
+    <Content Include="Scripts\src\methods\placements.js" />
+    <Content Include="Scripts\src\methods\update.js" />
+    <Content Include="Scripts\src\modifiers\applyStyle.js" />
+    <Content Include="Scripts\src\modifiers\arrow.js" />
+    <Content Include="Scripts\src\modifiers\computeStyle.js" />
+    <Content Include="Scripts\src\modifiers\flip.js" />
+    <Content Include="Scripts\src\modifiers\hide.js" />
+    <Content Include="Scripts\src\modifiers\index.js" />
+    <Content Include="Scripts\src\modifiers\inner.js" />
+    <Content Include="Scripts\src\modifiers\keepTogether.js" />
+    <Content Include="Scripts\src\modifiers\offset.js" />
+    <Content Include="Scripts\src\modifiers\preventOverflow.js" />
+    <Content Include="Scripts\src\modifiers\shift.js" />
+    <Content Include="Scripts\src\utils\clockwise.js" />
+    <Content Include="Scripts\src\utils\computeAutoPlacement.js" />
+    <Content Include="Scripts\src\utils\debounce.js" />
+    <Content Include="Scripts\src\utils\find.js" />
+    <Content Include="Scripts\src\utils\findCommonOffsetParent.js" />
+    <Content Include="Scripts\src\utils\findIndex.js" />
+    <Content Include="Scripts\src\utils\getBordersSize.js" />
+    <Content Include="Scripts\src\utils\getBoundaries.js" />
+    <Content Include="Scripts\src\utils\getBoundingClientRect.js" />
+    <Content Include="Scripts\src\utils\getClientRect.js" />
+    <Content Include="Scripts\src\utils\getFixedPositionOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetRect.js" />
+    <Content Include="Scripts\src\utils\getOffsetRectRelativeToArbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getOppositePlacement.js" />
+    <Content Include="Scripts\src\utils\getOppositeVariation.js" />
+    <Content Include="Scripts\src\utils\getOuterSizes.js" />
+    <Content Include="Scripts\src\utils\getParentNode.js" />
+    <Content Include="Scripts\src\utils\getPopperOffsets.js" />
+    <Content Include="Scripts\src\utils\getReferenceNode.js" />
+    <Content Include="Scripts\src\utils\getReferenceOffsets.js" />
+    <Content Include="Scripts\src\utils\getRoot.js" />
+    <Content Include="Scripts\src\utils\getRoundedOffsets.js" />
+    <Content Include="Scripts\src\utils\getScroll.js" />
+    <Content Include="Scripts\src\utils\getScrollParent.js" />
+    <Content Include="Scripts\src\utils\getStyleComputedProperty.js" />
+    <Content Include="Scripts\src\utils\getSupportedPropertyName.js" />
+    <Content Include="Scripts\src\utils\getViewportOffsetRectRelativeToArtbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getWindow.js" />
+    <Content Include="Scripts\src\utils\getWindowSizes.js" />
+    <Content Include="Scripts\src\utils\includeScroll.js" />
+    <Content Include="Scripts\src\utils\index.js" />
+    <Content Include="Scripts\src\utils\isBrowser.js" />
+    <Content Include="Scripts\src\utils\isFixed.js" />
+    <Content Include="Scripts\src\utils\isFunction.js" />
+    <Content Include="Scripts\src\utils\isIE.js" />
+    <Content Include="Scripts\src\utils\isModifierEnabled.js" />
+    <Content Include="Scripts\src\utils\isModifierRequired.js" />
+    <Content Include="Scripts\src\utils\isNumeric.js" />
+    <Content Include="Scripts\src\utils\isOffsetContainer.js" />
+    <Content Include="Scripts\src\utils\removeEventListeners.js" />
+    <Content Include="Scripts\src\utils\runModifiers.js" />
+    <Content Include="Scripts\src\utils\setAttributes.js" />
+    <Content Include="Scripts\src\utils\setStyles.js" />
+    <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="WebUI\DashBoard.aspx" />
     <Content Include="WebUI\Employee.aspx" />
     <Content Include="WebUI\Inventory.aspx" />
     <Content Include="WebUI\Lab.aspx" />
+    <Content Include="WebUI\Logout.aspx" />
     <Content Include="WebUI\Maintenance.aspx" />
     <Content Include="WebUI\Role.aspx" />
     <Content Include="WebUI\RoleRights.aspx" />
     <Content Include="WebUI\Shift.aspx" />
+    <Content Include="WebUI\TankLabReport.aspx" />
+    <Content Include="WebUI\UtilityConsumptionCost.aspx" />
     <Content Include="WebUI\WeighAnalysis.aspx" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="fonts\font-awesome\less\animated.less" />
+    <Content Include="fonts\font-awesome\less\bordered-pulled.less" />
+    <Content Include="fonts\font-awesome\less\core.less" />
+    <Content Include="fonts\font-awesome\less\fixed-width.less" />
+    <Content Include="fonts\font-awesome\less\font-awesome.less" />
+    <Content Include="fonts\font-awesome\less\icons.less" />
+    <Content Include="fonts\font-awesome\less\larger.less" />
+    <Content Include="fonts\font-awesome\less\list.less" />
+    <Content Include="fonts\font-awesome\less\mixins.less" />
+    <Content Include="fonts\font-awesome\less\path.less" />
+    <Content Include="fonts\font-awesome\less\rotated-flipped.less" />
+    <Content Include="fonts\font-awesome\less\screen-reader.less" />
+    <Content Include="fonts\font-awesome\less\stacked.less" />
+    <Content Include="fonts\font-awesome\less\variables.less" />
+    <Content Include="fonts\font-awesome\scss\font-awesome.scss" />
+    <Content Include="fonts\font-awesome\scss\_animated.scss" />
+    <Content Include="fonts\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="fonts\font-awesome\scss\_core.scss" />
+    <Content Include="fonts\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="fonts\font-awesome\scss\_icons.scss" />
+    <Content Include="fonts\font-awesome\scss\_larger.scss" />
+    <Content Include="fonts\font-awesome\scss\_list.scss" />
+    <Content Include="fonts\font-awesome\scss\_mixins.scss" />
+    <Content Include="fonts\font-awesome\scss\_path.scss" />
+    <Content Include="fonts\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="fonts\font-awesome\scss\_screen-reader.scss" />
+    <Content Include="fonts\font-awesome\scss\_stacked.scss" />
+    <Content Include="fonts\font-awesome\scss\_variables.scss" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fonts\roboto-v15-latin-300.woff" />
+    <Content Include="fonts\fonts\roboto-v15-latin-300.woff2" />
+    <Content Include="fonts\fonts\roboto-v15-latin-500.woff" />
+    <Content Include="fonts\fonts\roboto-v15-latin-500.woff2" />
+    <Content Include="fonts\fonts\roboto-v15-latin-700.woff" />
+    <Content Include="fonts\fonts\roboto-v15-latin-700.woff2" />
+    <Content Include="fonts\fonts\roboto-v15-latin-regular.woff" />
+    <Content Include="fonts\fonts\roboto-v15-latin-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Properties\PublishProfiles\Britania.pubxml" />
-    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-3.3.1.js" />
-    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
     <Content Include="Scripts\WebForms\GridView.js" />
@@ -444,6 +618,20 @@
     <Compile Include="ReportUI\CIP.aspx.designer.cs">
       <DependentUpon>CIP.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ReportUI\CIP_2.aspx.cs">
+      <DependentUpon>CIP_2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportUI\CIP_2.aspx.designer.cs">
+      <DependentUpon>CIP_2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportUI\CIP_3.aspx.cs">
+      <DependentUpon>CIP_3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportUI\CIP_3.aspx.designer.cs">
+      <DependentUpon>CIP_3.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ReportUI\ConcFeedTankStatus.aspx.cs">
       <DependentUpon>ConcFeedTankStatus.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -479,6 +667,13 @@
     <Compile Include="ReportUI\CrystallizationTankStatus.aspx.designer.cs">
       <DependentUpon>CrystallizationTankStatus.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ReportUI\CrystallizationTankStatus_SCM.aspx.cs">
+      <DependentUpon>CrystallizationTankStatus_SCM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportUI\CrystallizationTankStatus_SCM.aspx.designer.cs">
+      <DependentUpon>CrystallizationTankStatus_SCM.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ReportUI\DryerDataLog.aspx.cs">
       <DependentUpon>DryerDataLog.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -492,6 +687,13 @@
     </Compile>
     <Compile Include="ReportUI\EvaporatorLog.aspx.designer.cs">
       <DependentUpon>EvaporatorLog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportUI\Evaporator_SCM_DataLogSheetReport.aspx.cs">
+      <DependentUpon>Evaporator_SCM_DataLogSheetReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportUI\Evaporator_SCM_DataLogSheetReport.aspx.designer.cs">
+      <DependentUpon>Evaporator_SCM_DataLogSheetReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="ReportUI\InventoryReport.aspx.cs">
       <DependentUpon>InventoryReport.aspx</DependentUpon>
@@ -513,6 +715,55 @@
     </Compile>
     <Compile Include="ReportUI\MaintenanceReport.aspx.designer.cs">
       <DependentUpon>MaintenanceReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportUI\MassBalanceForDryer.aspx.cs">
+      <DependentUpon>MassBalanceForDryer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportUI\MassBalanceForDryer.aspx.designer.cs">
+      <DependentUpon>MassBalanceForDryer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportUI\MassBalanceForEvaporator.aspx.cs">
+      <DependentUpon>MassBalanceForEvaporator.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportUI\MassBalanceForEvaporator.aspx.designer.cs">
+      <DependentUpon>MassBalanceForEvaporator.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportUI\MassBalanceForSMP.aspx.cs">
+      <DependentUpon>MassBalanceForSMP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportUI\MassBalanceForSMP.aspx.designer.cs">
+      <DependentUpon>MassBalanceForSMP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportUI\MassBalanceWhey.aspx.cs">
+      <DependentUpon>MassBalanceWhey.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportUI\MassBalanceWhey.aspx.designer.cs">
+      <DependentUpon>MassBalanceWhey.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportUI\MotorDataSheet_SCM.aspx.cs">
+      <DependentUpon>MotorDataSheet_SCM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportUI\MotorDataSheet_SCM.aspx.designer.cs">
+      <DependentUpon>MotorDataSheet_SCM.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportUI\NFandRO_CIPLog_Report.aspx.cs">
+      <DependentUpon>NFandRO_CIPLog_Report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportUI\NFandRO_CIPLog_Report.aspx.designer.cs">
+      <DependentUpon>NFandRO_CIPLog_Report.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportUI\NFandRO_ProdLog_Report.aspx.cs">
+      <DependentUpon>NFandRO_ProdLog_Report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportUI\NFandRO_ProdLog_Report.aspx.designer.cs">
+      <DependentUpon>NFandRO_ProdLog_Report.aspx</DependentUpon>
     </Compile>
     <Compile Include="ReportUI\NFWheyStorage.aspx.cs">
       <DependentUpon>NFWheyStorage.aspx</DependentUpon>
@@ -549,6 +800,13 @@
     <Compile Include="ReportUI\TankerDispatch.aspx.designer.cs">
       <DependentUpon>TankerDispatch.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ReportUI\Tank_Lab_report.aspx.cs">
+      <DependentUpon>Tank_Lab_report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportUI\Tank_Lab_report.aspx.designer.cs">
+      <DependentUpon>Tank_Lab_report.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ReportUI\Transfer.aspx.cs">
       <DependentUpon>Transfer.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -562,6 +820,20 @@
     </Compile>
     <Compile Include="ReportUI\UtilityConsumption.aspx.designer.cs">
       <DependentUpon>UtilityConsumption.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportUI\UtilityConsumptionSCMReport.aspx.cs">
+      <DependentUpon>UtilityConsumptionSCMReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportUI\UtilityConsumptionSCMReport.aspx.designer.cs">
+      <DependentUpon>UtilityConsumptionSCMReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportUI\VacuumCoolerAndEjector_SCM.aspx.cs">
+      <DependentUpon>VacuumCoolerAndEjector_SCM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportUI\VacuumCoolerAndEjector_SCM.aspx.designer.cs">
+      <DependentUpon>VacuumCoolerAndEjector_SCM.aspx</DependentUpon>
     </Compile>
     <Compile Include="ReportUI\WheyAnalysisReport.aspx.cs">
       <DependentUpon>WheyAnalysisReport.aspx</DependentUpon>
@@ -626,6 +898,13 @@
     <Compile Include="WebUI\Lab.aspx.designer.cs">
       <DependentUpon>Lab.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WebUI\Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebUI\Maintenance.aspx.cs">
       <DependentUpon>Maintenance.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -654,6 +933,20 @@
     <Compile Include="WebUI\Shift.aspx.designer.cs">
       <DependentUpon>Shift.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WebUI\TankLabReport.aspx.cs">
+      <DependentUpon>TankLabReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\TankLabReport.aspx.designer.cs">
+      <DependentUpon>TankLabReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUI\UtilityConsumptionCost.aspx.cs">
+      <DependentUpon>UtilityConsumptionCost.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUI\UtilityConsumptionCost.aspx.designer.cs">
+      <DependentUpon>UtilityConsumptionCost.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebUI\WeighAnalysis.aspx.cs">
       <DependentUpon>WeighAnalysis.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -667,8 +960,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper.js.flow" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -694,11 +990,18 @@
       <Name>Powder_MISProduct.DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ProjectExtensions>

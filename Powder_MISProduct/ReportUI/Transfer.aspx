@@ -85,24 +85,26 @@
                     <div class="col-md-12" style="overflow: scroll">
                          <asp:GridView runat="server" ID="gvTransfer"
                         AutoGenerateColumns="False" GridLines="Both" HeaderStyle-Wrap="false"
-                        HeaderStyle-Font-Size="Medium" CssClass="gvTheGrid striped" OnPreRender="gvTransfer_PreRender">
+                        HeaderStyle-Font-Size="Medium" CssClass="table table-striped" OnPreRender="gvTransfer_PreRender">
 <%--                        <RowStyle HorizontalAlign="Center"  Width="100%"/>--%>
                            <Columns>
                             <asp:BoundField DataField="SrNo" HeaderText="Sr No." ItemStyle-Wrap="false" />
-                            <asp:BoundField DataField="ShiftName" HeaderText="ShiftName" ItemStyle-Wrap="false" />
-                         <asp:BoundField DataField="Date" HeaderText="Date" ItemStyle-Wrap="false" />
+                            <asp:BoundField DataField="Date" HeaderText="Date" ItemStyle-Wrap="false" />
+                            <asp:BoundField DataField="ShiftName" HeaderText="Shift No." ItemStyle-Wrap="false" />
+                            <asp:BoundField DataField="FunctionNo" HeaderText="Function No." ItemStyle-Wrap="false" />
                             <asp:BoundField DataField="TransferName" HeaderText="Transfer Name" ItemStyle-Wrap="false" />
-                            <asp:BoundField DataField="FunctionNo" HeaderText="FunctionNo" ItemStyle-Wrap="false" />
                             <asp:BoundField DataField="Status" HeaderText="Status" ItemStyle-Wrap="false" />
                             <asp:BoundField DataField="StartTime" HeaderText="Start Time" ItemStyle-Wrap="false" />
-                            <asp:BoundField DataField="StopTime" HeaderText="Stop Time" ItemStyle-Wrap="false" />
+                            <asp:BoundField DataField="StopTime" HeaderText="End Time" ItemStyle-Wrap="false" />
                             <asp:BoundField DataField="TotalTime" HeaderText="Running Time" ItemStyle-Wrap="false" />
                             <asp:BoundField DataField="Source" HeaderText="Source" ItemStyle-Wrap="false" />
                             <asp:BoundField DataField="Destination" HeaderText="Destination" ItemStyle-Wrap="false" />
-                            <asp:BoundField DataField="Product" HeaderText="ProductName" ItemStyle-Wrap="false" />
-                            <asp:BoundField DataField="Fat" HeaderText="FAT" ItemStyle-Wrap="false" />
-                            <asp:BoundField DataField="SNF" HeaderText="SNF" ItemStyle-Wrap="false" />
-                            <asp:BoundField DataField="Quantity" HeaderText="Quantity (Kg.)" ItemStyle-Wrap="false" />
+                            <asp:BoundField DataField="Product" HeaderText="Product Name" ItemStyle-Wrap="false" />
+
+                               <%--Farheen: Remove fat and SNF column as per the client new requirement.--%>
+                           <%-- <asp:BoundField DataField="Fat" HeaderText="FAT" ItemStyle-Wrap="false" />
+                            <asp:BoundField DataField="SNF" HeaderText="SNF" ItemStyle-Wrap="false" />--%>
+                            <asp:BoundField DataField="Quantity" HeaderText="Quantity (Liters)" ItemStyle-Wrap="false" />
                          
                         </Columns>
                          </asp:GridView>

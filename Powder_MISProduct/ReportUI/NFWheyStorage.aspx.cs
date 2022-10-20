@@ -20,10 +20,17 @@ namespace Powder_MISProduct.ReportUI
 {
     public partial class NFWheyStorage : System.Web.UI.Page
     {
+        #region Load page event
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                divExport.Visible = false;
+                txtFromDate.Text = DateTime.Today.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+                txtToDate.Text = DateTime.Today.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+            }
         }
+        #endregion
 
         #region VerifyRenderingInServerForm
         public override void VerifyRenderingInServerForm(Control control)
@@ -33,7 +40,7 @@ namespace Powder_MISProduct.ReportUI
         #endregion
 
         #region BindGrid
-        public void NFwheyStorageLog()
+        public void NFwheyStorageLog() 
         {
             try
             {
@@ -43,20 +50,31 @@ namespace Powder_MISProduct.ReportUI
                   CultureInfo.InvariantCulture);
                 DateTime dtToDateTime = DateTime.ParseExact(txtToDate.Text + " " + txtToTime.Text, "dd/MM/yyyy HH:mm:ss",
                     CultureInfo.InvariantCulture);
-                objResult = objNFWheyStorage.NFwheyStorage(dtFromDateTime, dtToDateTime);
-                if (objResult.ResultDt.Rows.Count > 0)
+                if (dtFromDateTime <= dtToDateTime)
                 {
-                    gvNFWheyStorage.DataSource = objResult.ResultDt;
-                    gvNFWheyStorage.DataBind();
-                    // imgWordButton.Visible = imgExcelButton.Visible = true;
-                    divNo.Visible = false;
+                    objResult = objNFWheyStorage.NFwheyStorage(dtFromDateTime, dtToDateTime);
+                    if (objResult.ResultDt.Rows.Count > 0)
+                    {
+                        gvNFWheyStorage.DataSource = objResult.ResultDt;
+                        gvNFWheyStorage.DataBind();
+                        // imgWordButton.Visible = imgExcelButton.Visible = true;
+                        divNo.Visible = false;
+                        divExport.Visible = true;
+                        gvNFWheyStorage.Visible = true;
+
+                    }
+                    else
+                    {
+                        divNo.Visible = true;
+                        divExport.Visible = false;
+                        gvNFWheyStorage.Visible = false;
+                    }
                 }
                 else
                 {
-                    // imgWordButton.Visible = imgExcelButton.Visible = false;
-                    divNo.Visible = true;
-                    // ClientScript.RegisterStartupScript(typeof(Page), "MessagePopUp",
-                    //"<script>alert('No Record Found.');</script>");
+                    gvNFWheyStorage.Visible = false;
+                    ClientScript.RegisterStartupScript(typeof(Page), "MessagePopUp",
+                   "<script>alert('You cannot select From Date greater than To Date.');</script>");
                 }
             }
             catch (Exception ex)
@@ -123,9 +141,9 @@ namespace Powder_MISProduct.ReportUI
         #endregion
 
 
-      
 
-        protected void gvNFWheyStorage_RowCreated(object sender, GridViewRowEventArgs e)
+
+        protected void gvNFWheyStorage_RowCreated(object sender, GridViewRowEventArgs e) 
         {
             if (e.Row.RowType == DataControlRowType.Header)
             {
@@ -355,7 +373,7 @@ namespace Powder_MISProduct.ReportUI
                         sb.Append("<div align='center' style='font-size:26px;color:Maroon;'><b>");
                         sb.Append(text2);
                         sb.Append("</b></div>");
-                        sb.Append("<br/>");
+                        sb.Append("<br/>"); 
 
                         string content = "<table style='display: table;width: 900px; clear:both;'> <tr> <th colspan='4' style='float: left;padding-left: 350px;'><div align='left'><strong>From Date: </strong>" + txtFromDate.Text + "</div></th>";
 

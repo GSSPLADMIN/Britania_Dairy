@@ -8,6 +8,7 @@
             <li class="active">Role Rights </li>
         </ul>
     </div>
+    <div id="divCurrenTabSelected" class="hidden" visible="false">Setting</div>
     <div class="col-md-12">
         <div class="box box-info">
             <div class="box-body center-block">

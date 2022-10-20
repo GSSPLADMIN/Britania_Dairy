@@ -5,7 +5,7 @@
       <div id="breadcrumb">
         <ul class="breadcrumb">
             <li><i class="fa fa-home"></i><a href="../WebUI/DashBoard.aspx">Home</a></li>
-            <li class="active">Evaporator Log Report</li>
+            <li class="active">| Evaporator Log Report</li>
         </ul>
     </div>
     <div class="col-md-12">
@@ -82,11 +82,19 @@
                 </div>
                 <br />
                 <div class="row">
-                    <div class="col-md-12" style="overflow: scroll">
-                         <asp:GridView runat="server" ID="gvEvaporator"
+                    <div class="col-md-12">
+                         <div class="col-md-12" style="overflow: scroll">
+                        <asp:GridView ID="gvEvaporator" runat="server" GridLines="Both" 
+                        AutoGenerateColumns="true" HeaderStyle-Wrap="false"
+                        Width="100%" ShowHeader="false"
+                        OnRowCreated="gvEvaporator_RowCreated" OnPreRender="gvEvaporator_PreRender"
+                        HeaderStyle-Font-Size="Medium" CssClass="table table-striped" 
+                        HeaderStyle-HorizontalAlign="Center" >
+                        <RowStyle HorizontalAlign="Center"  Width="100%"/>
+                         </asp:GridView>
+                        <%-- <asp:GridView runat="server" ID="gvEvaporator"
                         AutoGenerateColumns="False" GridLines="Both" HeaderStyle-Wrap="false"
                         HeaderStyle-Font-Size="Medium" CssClass="gvTheGrid striped" OnPreRender="gvEvaporator_PreRender1">
-<%--                        <RowStyle HorizontalAlign="Center"  Width="100%"/>--%>
                            <Columns>
                             <asp:BoundField DataField="SrNo" HeaderText="Sr No." ItemStyle-Wrap="false" />
                             <asp:BoundField DataField="Date" HeaderText="Date" ItemStyle-Wrap="false" />
@@ -124,10 +132,9 @@
                             <asp:BoundField DataField="FinalConcDensity" HeaderText="FinalConcDensity(Kg/m3)" ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>
                             <asp:BoundField DataField="FinalConcFlow" HeaderText="FinalConcFlow(Kg/hr)" ItemStyle-Wrap="false" />
                          <asp:BoundField DataField="FinalConcTemp" HeaderText="FinalConcTemp(°C)" ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>
-<%--                            <asp:BoundField DataField="Remarks" HeaderText="Remarks" ItemStyle-Wrap="false" />--%>
 
                         </Columns>
-                         </asp:GridView>
+                         </asp:GridView>--%>
 
                     </div>
                 </div>

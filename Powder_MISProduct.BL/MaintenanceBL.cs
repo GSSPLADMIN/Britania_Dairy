@@ -89,7 +89,7 @@ namespace Powder_MISProduct.BL
                 pSqlParameter[0].Direction = ParameterDirection.Input;
                 pSqlParameter[0].Value = objMaintenanceBo.Id;
 
-                pSqlParameter[1] = new SqlParameter("@Date", SqlDbType.NVarChar);
+                pSqlParameter[1] = new SqlParameter("@Date", SqlDbType.Date);
                 pSqlParameter[1].Direction = ParameterDirection.Input;
                 pSqlParameter[1].Value = objMaintenanceBo.Date;
 
@@ -177,7 +177,7 @@ namespace Powder_MISProduct.BL
                 pSqlParameter[0].Direction = ParameterDirection.Input;
                 pSqlParameter[0].Value = objMaintenanceBo.Id;
 
-                pSqlParameter[1] = new SqlParameter("@Date", SqlDbType.NVarChar);
+                pSqlParameter[1] = new SqlParameter("@Date", SqlDbType.DateTime);
                 pSqlParameter[1].Direction = ParameterDirection.Input;
                 pSqlParameter[1].Value = objMaintenanceBo.Date;
 
@@ -225,7 +225,7 @@ namespace Powder_MISProduct.BL
                 pSqlParameter[12].Direction = ParameterDirection.Input;
                 pSqlParameter[12].Value = objMaintenanceBo.LastModifiedBy;
 
-                pSqlParameter[13] = new SqlParameter("@LastModifiedDate", SqlDbType.VarChar);
+                pSqlParameter[13] = new SqlParameter("@LastModifiedDate", SqlDbType.DateTime);
                 pSqlParameter[13].Direction = ParameterDirection.Input;
                 pSqlParameter[13].Value = objMaintenanceBo.LastModifiedDate;
 

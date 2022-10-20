@@ -85,21 +85,21 @@
                     <div class="col-md-12" style="overflow: scroll">
                          <asp:GridView runat="server" ID="gvMaintenance"
                         AutoGenerateColumns="False" GridLines="Both" HeaderStyle-Wrap="false"
-                        HeaderStyle-Font-Size="Medium" CssClass="gvTheGrid striped" OnPreRender="gvMaintenance_PreRender">
+                       CssClass="table table-striped" OnPreRender="gvMaintenance_PreRender">
 <%--                        <RowStyle HorizontalAlign="Center"  Width="100%"/>--%>
                                   <Columns>
                             <asp:BoundField DataField="SrNo" HeaderText="Sr No." ItemStyle-Wrap="false" />
                             <asp:BoundField DataField="Date" HeaderText="Date" ItemStyle-Wrap="false" />
 <%--                            <asp:BoundField DataField="Time" HeaderText="Time" ItemStyle-Wrap="false" />--%>
-                            <asp:BoundField DataField="EquipmentTagNo" HeaderText="EquipmentTagNo" ItemStyle-Wrap="false" />
-                            <asp:BoundField DataField="EquipmentName" HeaderText="EquipmentName" ItemStyle-Wrap="false" />
-                            <asp:BoundField DataField="StartTime" HeaderText="StartTime" ItemStyle-Wrap="false" />
-                            <asp:BoundField DataField="EndTime" HeaderText="EndTime" ItemStyle-Wrap="false" />
-                            <asp:BoundField DataField="PartNo" HeaderText="PartNo" ItemStyle-Wrap="false" />
+                            <asp:BoundField DataField="EquipmentTagNo" HeaderText="Equipment Tag No" ItemStyle-Wrap="false" />
+                            <asp:BoundField DataField="EquipmentName" HeaderText="Equipment Name" ItemStyle-Wrap="false" />
+                            <asp:BoundField DataField="StartTime" HeaderText="Start Time" ItemStyle-Wrap="false" />
+                            <asp:BoundField DataField="EndTime" HeaderText="End Time" ItemStyle-Wrap="false" />
+                            <asp:BoundField DataField="PartNo" HeaderText="Part No" ItemStyle-Wrap="false" />
                             <asp:BoundField DataField="Area" HeaderText="Area" ItemStyle-Wrap="false" />
-                            <asp:BoundField DataField="ProblemDetails" HeaderText="ProblemDetails" ItemStyle-Wrap="false" />
-                            <asp:BoundField DataField="ActionTaken" HeaderText="ActionTaken" ItemStyle-Wrap="false" />
-                             <asp:BoundField DataField="RectifiedBy" HeaderText="RectifiedBy" ItemStyle-Wrap="false" />
+                            <asp:BoundField DataField="ProblemDetails" HeaderText="Problem Details" ItemStyle-Wrap="false" />
+                            <asp:BoundField DataField="ActionTaken" HeaderText="Action Taken" ItemStyle-Wrap="false" />
+                             <asp:BoundField DataField="RectifiedBy" HeaderText="Rectified By" ItemStyle-Wrap="false" />
                             <asp:BoundField DataField="Remark" HeaderText="Remark" ItemStyle-Wrap="false" />
                         </Columns>
                          </asp:GridView>

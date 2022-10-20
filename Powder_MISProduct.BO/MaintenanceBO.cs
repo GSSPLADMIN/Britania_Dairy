@@ -32,7 +32,7 @@ namespace Powder_MISProduct.BO
 
 
         private int intId = 0;
-        private string strDate = string.Empty;
+        private DateTime strDate;
         private string strStartTime = string.Empty;
         private string strEndTime = string.Empty;
         private string strEquipmentTagNo = string.Empty;
@@ -57,7 +57,7 @@ namespace Powder_MISProduct.BO
             get { return intId; }
             set { intId = value; }
         }
-        public string Date
+        public DateTime Date
         {
             get { return strDate; }
             set { strDate = value; }

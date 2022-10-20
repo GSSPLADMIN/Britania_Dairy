@@ -83,10 +83,18 @@
                 <br />
                 <div class="row">
                     <div class="col-md-12" style="overflow: scroll">
-                       <asp:GridView runat="server" ID="gvWPL"
+                      <asp:GridView ID="gvWPL" runat="server" GridLines="Both" 
+                        AutoGenerateColumns="true" HeaderStyle-Wrap="false"
+                        Width="100%" ShowHeader="false"
+                        OnRowCreated="gvWPL_RowCreated" OnPreRender="gvWPL_PreRender"
+                        HeaderStyle-Font-Size="Medium" CssClass="table table-striped" 
+                        HeaderStyle-HorizontalAlign="Center" >
+                        <RowStyle HorizontalAlign="Center"  Width="100%"/>
+                         </asp:GridView>
+                       <%--<asp:GridView runat="server" ID="gvWPL"
                         AutoGenerateColumns="False" GridLines="Both" HeaderStyle-Wrap="false"
-                        HeaderStyle-Font-Size="Medium" CssClass="gvTheGrid striped" OnPreRender="gvWPL_PreRender">
-                        <Columns>
+                        HeaderStyle-Font-Size="Medium" CssClass="gvTheGrid striped" OnPreRender="gvWPL_PreRender">--%>
+                        <%--<Columns>
                             <asp:BoundField DataField="SrNo" HeaderText="Sr No." ItemStyle-Wrap="false" />
                             <asp:BoundField DataField="Date" HeaderText="Date" ItemStyle-Wrap="false" />
                             <asp:BoundField DataField="Time" HeaderText="Time" ItemStyle-Wrap="false" />
@@ -109,10 +117,10 @@
                             <asp:BoundField DataField="SeparatorInlineBypassed" HeaderText="SeparatorInlineBypassed" ItemStyle-Wrap="false" />
                          <asp:BoundField DataField="BRCInletTemp" HeaderText="BRCInletTemp(°C)" ItemStyle-Wrap="false" ><ItemStyle CssClass="right-align" /></asp:BoundField>
                             <asp:BoundField DataField="BRCInlineBypassed" HeaderText="BRCInlineBypassed" ItemStyle-Wrap="false" />
+                        </Columns>
+                    </asp:GridView>--%>
 <%--                            <asp:BoundField DataField="Remarks" HeaderText="Remarks" ItemStyle-Wrap="false" />--%>
 
-                        </Columns>
-                    </asp:GridView>
 
                     </div>
                 </div>

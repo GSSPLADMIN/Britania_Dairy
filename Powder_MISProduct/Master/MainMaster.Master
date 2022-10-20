@@ -108,7 +108,6 @@
                                 <span class="menu-hover"></span>
                             </a>
                             <ul class="submenu">
-                                <li id="Shift" runat="server" visible="false"><a href="../WebUI/Shift.aspx"><span class="submenu-label">Shift</span></a></li>
                              <%--   <li id="DryerPlantStatus" runat="server" visible="false"><a href="../WebUI/DryerPlantStatus.aspx"><span class="submenu-label">Dryer Plant Status</span></a></li>
                                 <li id="EvapPlantStatus" runat="server" visible="false"><a href="../WebUI/PlantStatusEvap.aspx"><span class="submenu-label">Evaporator Plant Status</span></a></li>
                                 <li id="DryerTag" runat="server" visible="false"><a href="../WebUI/DryerTag.aspx"><span class="submenu-label">Dryer Tags</span></a></li>
@@ -124,9 +123,12 @@
                                 <li id="MassBalanceFactor" runat="server" visible="false"><a href="../WebUI/MassBalanceFactor.aspx"><span class="submenu-label">MassBalanceFactor</span></a></li>
                                 <li id="EquipmentMaster" runat="server" visible="false"><a href="../WebUI/EquipmentMaster.aspx"><span class="submenu-label">Equipment Master</span></a></li>
                                 <li id="DeviceMaster" runat="server" visible="false"><a href="../WebUI/DeviceMaster.aspx"><span class="submenu-label">Device Master</span></a></li>--%>
-                               <li id="WeighAnalysis" runat="server" visible="false"><a href="../WebUI/WeighAnalysis.aspx"><span class="submenu-label">WeighAnalysis</span></a></li>
                                <li id="Inventory" runat="server" visible="false"><a href="../WebUI/Inventory.aspx"><span class="submenu-label">Inventory</span></a></li>
                                <li id="Lab" runat="server" visible="false"><a href="../WebUI/Lab.aspx"><span class="submenu-label">Lab</span></a></li>
+                                <li id="Shift" runat="server" visible="false"><a href="../WebUI/Shift.aspx"><span class="submenu-label">Shift</span></a></li>
+                               <li id="TankLabReport" runat="server" visible="false"><a href="../WebUI/TankLabReport.aspx"><span class="submenu-label">Tank Lab Report</span></a></li>
+                               <li id="UtilityConsumptionCost" runat="server" visible="false"><a href="../WebUI/UtilityConsumptionCost.aspx"><span class="submenu-label">Utility Consumption Cost</span></a></li>
+                               <li id="WeighAnalysis" runat="server" visible="false"><a href="../WebUI/WeighAnalysis.aspx"><span class="submenu-label">Whey Analysis</span></a></li>
 
 
                             </ul>
@@ -141,8 +143,8 @@
                                 <span class="menu-hover"></span>
                             </a>
                             <ul class="submenu">
-                                <li id="Role" runat="server" visible="false"><a href="../WebUI/Role.aspx"><span class="submenu-label">Role</span></a></li>
                                 <li id="Employee" runat="server" visible="false"><a href="../WebUI/Employee.aspx"><span class="submenu-label">Employee</span></a></li>
+                                <li id="Role" runat="server" visible="false"><a href="../WebUI/Role.aspx"><span class="submenu-label">Role</span></a></li>
                                 <li id="RoleRights" runat="server" visible="false"><a href="../WebUI/RoleRights.aspx"><span class="submenu-label">Role Rights</span></a></li>
                             </ul>
                         </li>
@@ -156,34 +158,49 @@
                                 <span class="menu-hover"></span>
                             </a>
                             <ul class="submenu">
-                                <li id="WheyAnalysisReport" runat="server" visible="true"><a href="../ReportUI/WheyAnalysisReport.aspx"><span class="submenu-label">WheyAnalysisReport</span></a></li>
+                                <li id="ChemicalConsumption" runat="server" visible="true"><a href="../ReportUI/ChemicalConsumption.aspx"><span class="submenu-label">Chemical Consumption</span></a></li>
+                                <li id="CIP" runat="server" visible="true"><a href="../ReportUI/CIP.aspx"><span class="submenu-label">CIP Circuit 1</span></a></li>
+                                <li id="CIP2" runat="server" visible="true"><a href="../ReportUI/CIP_2.aspx"><span class="submenu-label">CIP Circuit 2</span></a></li>
+                                <li id="CIP3" runat="server" visible="true"><a href="../ReportUI/CIP_3.aspx"><span class="submenu-label">CIP Circuit 3</span></a></li>
+                                <li id="ConcFeedTankStatus" runat="server" visible="false"><a href="../ReportUI/ConcFeedTankStatus.aspx"><span class="submenu-label">Conc Feed Tank Status</span></a></li>
+                                <li id="CPLLog" runat="server" visible="true"><a href="../ReportUI/CPLLog.aspx"><span class="submenu-label">CPL Log</span></a></li>
+                                <li id="CreamBufferTankStatus" runat="server" visible="true"><a href="../ReportUI/CreamBufferTankStatus.aspx"><span class="submenu-label">Cream Buffer Tank Status</span></a></li>
+                                <li id="CrystallizationTankStatus_SCM" runat="server" visible="false"><a href="../ReportUI/CrystallizationTankStatus_SCM.aspx"><span class="submenu-label">Crystallization SCM Tank Status</span></a></li>
+                                <li id="CrystallizationTankStatus" runat="server" visible="false"><a href="../ReportUI/CrystallizationTankStatus.aspx"><span class="submenu-label">Crystallization Tank Status</span></a></li>
+                                 <li id="DryerDataLog" runat="server" visible="false"><a href="../ReportUI/DryerDataLog.aspx"><span class="submenu-label">Dryer Data Log</span></a></li>
+                                <li id="EvaporatorLog" runat="server" visible="false"><a href="../ReportUI/EvaporatorLog.aspx"><span class="submenu-label">Evaporator Log</span></a></li>
+                                <li id="Evaporator_SCM_DataLogSheetReport" runat="server" visible="false"><a href="../ReportUI/Evaporator_SCM_DataLogSheetReport.aspx"><span class="submenu-label">Evaporator SCM Log</span></a></li>
+                                <li id="InventoryReport" runat="server" visible="true"><a href="../ReportUI/InventoryReport.aspx"><span class="submenu-label">Inventory Report</span></a></li>
+                                 <li id="LabReport" runat="server" visible="true"><a href="../ReportUI/LabReport.aspx"><span class="submenu-label">Lab Report</span></a></li>
+                                <li id="MaintenanceReport" runat="server" visible="true"><a href="../ReportUI/MaintenanceReport.aspx"><span class="submenu-label">Maintenance Report</span></a></li>
+                                <li id="MassBalanceForDryer" runat="server" visible="false"><a href="../ReportUI/MassBalanceForDryer.aspx"><span class="submenu-label">Mass Balance For Dryer</span></a></li>
+                                <li id="MassBalanceForEvaporator" runat="server" visible="false"><a href="../ReportUI/MassBalanceForEvaporator.aspx"><span class="submenu-label">Mass Balance For Evaporator</span></a></li>
+                                <li id="MotorDataSheet_SCM" runat="server" visible="false"><a href="../ReportUI/MotorDataSheet_SCM.aspx"><span class="submenu-label">Motor SCM Data Log Sheet</span></a></li>
+                                <%--Remove Mass balance for SMP, now it is not required any more--%>
+                                <%--<li id="MassBalanceForSMP" runat="server" visible="false"><a href="../ReportUI/MassBalanceForSMP.aspx"><span class="submenu-label">Mass Balance For SMP</span></a></li>--%>
+                                <li id="MassBalanceWhey" runat="server" visible="false"><a href="../ReportUI/MassBalanceWhey.aspx"><span class="submenu-label">Mass Balance Whey</span></a></li>
+                                 <li id="NFAndROCIP" runat="server" visible="true"><a href="../ReportUI/NFandRO_CIPLog_Report.aspx"><span class="submenu-label">NF And RO CIP Report</span></a></li>
+                                 <li id="NFAndROProduction" runat="server" visible="true"><a href="../ReportUI/NFandRO_ProdLog_Report.aspx"><span class="submenu-label">NF And RO Production Report</span></a></li>
+                                <li id="NFWheyStorage" runat="server" visible="true"><a href="../ReportUI/NFWheyStorage.aspx"><span class="submenu-label">NF Whey Storage</span></a></li>
+                                <li id="CreamTankStatus" runat="server" visible="true"><a href="../ReportUI/CreamTankStatus.aspx"><span class="submenu-label">Past Cream Tank Status</span></a></li>
+                                <li id="PastwheyStorage" runat="server" visible="true"><a href="../ReportUI/PastwheyStorage.aspx"><span class="submenu-label">Past Whey Storage</span></a></li>
+                                <li id="ROPermeateStatus" runat="server" visible="true"><a href="../ReportUI/ROPermeateStatus.aspx"><span class="submenu-label">RO Permeate Status</span></a></li>
+                                <li id="RWSTStorage" runat="server" visible="true"><a href="../ReportUI/RWSTStorage.aspx"><span class="submenu-label">RWST Storage</span></a></li>
+                                <li id="TankerDispatch" runat="server" visible="true"><a href="../ReportUI/TankerDispatch.aspx"><span class="submenu-label">Tanker Dispatch</span></a></li>
                                <li id="Transfer" runat="server" visible="true"><a href="../ReportUI/Transfer.aspx"><span class="submenu-label">Transfer</span></a></li>                                                            
-                                <li id="UtilityConsumption" runat="server" visible="true"><a href="../ReportUI/UtilityConsumption.aspx"><span class="submenu-label">UtilityConsumption</span></a></li>
+                                <li id="UtilityConsumption" runat="server" visible="true"><a href="../ReportUI/UtilityConsumption.aspx"><span class="submenu-label">Utility Consumption</span></a></li>
+                                <li id="UtilityConsumptionSCMReport" runat="server" visible="true"><a href="../ReportUI/UtilityConsumptionSCMReport.aspx"><span class="submenu-label">Utility Consumption SCM</span></a></li>
+                                <li id="VacuumCoolerAndEjector_SCM" runat="server" visible="true"><a href="../ReportUI/VacuumCoolerAndEjector_SCM.aspx"><span class="submenu-label">Vacuum Cooler & Ejector</span></a></li>
+                                <li id="WPLLog" runat="server" visible="true"><a href="../ReportUI/WPLLog.aspx"><span class="submenu-label">WPL Log</span></a></li>
+                                <li id="WheyAnalysisReport" runat="server" visible="true"><a href="../ReportUI/WheyAnalysisReport.aspx"><span class="submenu-label">Whey Analysis Report</span></a></li>
+                                <li id="Tank_Lab_report" runat="server" visible="true"><a href="../ReportUI/Tank_Lab_report.aspx"><span class="submenu-label">Tank Lab Report</span></a></li>
 
-                                <li id="RWSTStorage" runat="server" visible="true"><a href="../ReportUI/RWSTStorage.aspx"><span class="submenu-label">RWSTStorage</span></a></li>
-                                <li id="PastwheyStorage" runat="server" visible="true"><a href="../ReportUI/PastwheyStorage.aspx"><span class="submenu-label">PastwheyStorage</span></a></li>
                                <%-- <li id="DryerProductionLogReport" runat="server" visible="true"><a href="../ReportUI/DryerProductionLogReport.aspx"><span class="submenu-label">Dryer Production Log</span></a></li>
                                 <li id="EvaporationCipLogReport" runat="server" visible="true"><a href="../ReportUI/EvaporationCipLogReport.aspx"><span class="submenu-label">Evaporation Cip Log</span></a></li>
                                 <li id="PowderProductionLogReport" runat="server" visible="true"><a href="../ReportUI/PowderProductionLogReport.aspx"><span class="submenu-label">Powder Production Log</span></a></li>--%>
 
-                                <li id="NFWheyStorage" runat="server" visible="true"><a href="../ReportUI/NFWheyStorage.aspx"><span class="submenu-label">NFWheyStorage</span></a></li>
-                                <li id="ROPermeateStatus" runat="server" visible="true"><a href="../ReportUI/ROPermeateStatus.aspx"><span class="submenu-label">ROPermeateStatus</span></a></li>
-                                <li id="CreamBufferTankStatus" runat="server" visible="true"><a href="../ReportUI/CreamBufferTankStatus.aspx"><span class="submenu-label">CreamBufferTankStatus</span></a></li>
-                                <li id="CreamTankStatus" runat="server" visible="true"><a href="../ReportUI/CreamTankStatus.aspx"><span class="submenu-label">CreamTankStatus</span></a></li>
-                                <li id="WPLLog" runat="server" visible="true"><a href="../ReportUI/WPLLog.aspx"><span class="submenu-label">WPLLog</span></a></li>
-                                <li id="CPLLog" runat="server" visible="true"><a href="../ReportUI/CPLLog.aspx"><span class="submenu-label">CPLLog</span></a></li>
-                                <li id="TankerDispatch" runat="server" visible="true"><a href="../ReportUI/TankerDispatch.aspx"><span class="submenu-label">TankerDispatch</span></a></li>
-                                <li id="CIP" runat="server" visible="true"><a href="../ReportUI/CIP.aspx"><span class="submenu-label">CIP</span></a></li>
-                                <li id="ChemicalConsumption" runat="server" visible="true"><a href="../ReportUI/ChemicalConsumption.aspx"><span class="submenu-label">ChemicalConsumption</span></a></li>
-                                <li id="InventoryReport" runat="server" visible="true"><a href="../ReportUI/InventoryReport.aspx"><span class="submenu-label">InventoryReport</span></a></li>
-                                <li id="MaintenanceReport" runat="server" visible="true"><a href="../ReportUI/MaintenanceReport.aspx"><span class="submenu-label">MaintenanceReport</span></a></li>
-                                 <li id="LabReport" runat="server" visible="true"><a href="../ReportUI/LabReport.aspx"><span class="submenu-label">LabReport</span></a></li>
 
-                                <li id="EvaporatorLog" runat="server" visible="false"><a href="../ReportUI/EvaporatorLog.aspx"><span class="submenu-label">EvaporatorLog</span></a></li>
-                                 <li id="DryerDataLog" runat="server" visible="false"><a href="../ReportUI/DryerDataLog.aspx"><span class="submenu-label">DryerDataLog</span></a></li>
                                 
-                                <li id="ConcFeedTankStatus" runat="server" visible="false"><a href="../ReportUI/ConcFeedTankStatus.aspx"><span class="submenu-label">ConcFeedTankStatus</span></a></li>
-                                <li id="CrystallizationTankStatus" runat="server" visible="false"><a href="../ReportUI/CrystallizationTankStatus.aspx"><span class="submenu-label">CrystallizationTankStatus</span></a></li>
                             <%--    <li id="BreakdownReport" runat="server" visible="false"><a href="../ReportUI/BreakDownMaintainanceReport.aspx"><span class="submenu-label">BreakDown Maintainance</span></a></li>
                                 <li id="RoutineReport" runat="server" visible="false"><a href="../ReportUI/RoutineMaintainanceReport.aspx"><span class="submenu-label">Preventive Maintainance</span></a></li>
                                 <li id="PowderProcessingCostReport" runat="server" visible="false"><a href="../ReportUI/PowderProcessingCostReport.aspx"><span class="submenu-label">Powder Processing Cost Report</span></a></li>

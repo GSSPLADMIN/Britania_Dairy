@@ -87,7 +87,7 @@
                         AutoGenerateColumns="true" HeaderStyle-Wrap="false"
                         Width="100%" ShowHeader="false"
                         OnRowCreated="gvNFWheyStorage_RowCreated" OnPreRender="gvNFWheyStorage_PreRender"
-                        HeaderStyle-Font-Size="Medium" CssClass="gvTheGrid striped" 
+                        HeaderStyle-Font-Size="Medium" CssClass="table table-striped" 
                         HeaderStyle-HorizontalAlign="Center" >
                         <RowStyle HorizontalAlign="Center"  Width="100%"/>
                          </asp:GridView>

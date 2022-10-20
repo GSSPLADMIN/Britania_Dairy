@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/MainMaster.Master" AutoEventWireup="true" CodeBehind="LabReport.aspx.cs" Inherits="Powder_MISProduct.ReportUI.LabReport" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -14,11 +15,12 @@
                 <div class="row">
                     <div class="col-md-10" style="font-size: 24px;">
                         Lab Report
+                   
                     </div>
                     <div class="col-md-2 right" id="divExport" runat="server">
                         <asp:LinkButton ID="imgPDFButton" runat="server" OnClick="imgPDFButton_Click" CssClass="btn btn-danger quick-btn"><i class="fa fa-file-pdf-o"></i></asp:LinkButton>
                         <asp:LinkButton ID="imgExcelButton" runat="server" OnClick="imgExcelButton_Click" CssClass="btn btn-success quick-btn"><i class="fa fa-file-excel-o"></i></asp:LinkButton>
-<%--                        <asp:LinkButton ID="imgWordButton" runat="server" OnClick="imgbtnWord_OnClick" CssClass="btn btn-info quick-btn"><i class="fa fa-file-word-o"></i></asp:LinkButton>--%>
+                        <%--                        <asp:LinkButton ID="imgWordButton" runat="server" OnClick="imgbtnWord_OnClick" CssClass="btn btn-info quick-btn"><i class="fa fa-file-word-o"></i></asp:LinkButton>--%>
                     </div>
                 </div>
             </div>
@@ -27,17 +29,20 @@
                     <div class="col-md-12">
                         <div class="col-md-3">
                             From Date :
+                       
                         </div>
                         <div class="col-md-2">
                             From Time :
+                       
                         </div>
                         <div class="col-md-3">
                             To Date :
+                       
                         </div>
                         <div class="col-md-2">
                             To Time :
+                       
                         </div>
-                        
                     </div>
                 </div>
                 <div class="row">
@@ -75,7 +80,7 @@
                             </div>
                         </div>
                         <div class="col-md-2">
-                           <asp:Button runat="server" ID="btnGo" Text="Go" CssClass="btn btn-primary pull-right" ValidationGroup="g1" OnClick="btnGo_Click" />
+                            <asp:Button runat="server" ID="btnGo" Text="Go" CssClass="btn btn-primary pull-right" ValidationGroup="g1" OnClick="btnGo_Click" />
 
                         </div>
                     </div>
@@ -83,47 +88,47 @@
                 <br />
                 <div class="row">
                     <div class="col-md-12" style="overflow: scroll">
-                         <asp:GridView runat="server" ID="gvLab"
-                        AutoGenerateColumns="False" GridLines="Both" HeaderStyle-Wrap="false"
-                        HeaderStyle-Font-Size="Medium" CssClass="gvTheGrid striped" OnPreRender="gvLab_PreRender">
-<%--                        <RowStyle HorizontalAlign="Center"  Width="100%"/>--%>
-                                  <Columns>
-                            <asp:BoundField DataField="SrNo" HeaderText="Sr No." ItemStyle-Wrap="false" />
-                            <asp:BoundField DataField="Date" HeaderText="Date" ItemStyle-Wrap="false" />
-                             <asp:BoundField HeaderText="TypeofPowder" DataField="TypeofPowder" ItemStyle-Width="10%" />
-                        <asp:BoundField HeaderText="Time" DataField="Time" ItemStyle-Width="10%" />
-                        <asp:BoundField HeaderText="SampleId" DataField="SampleId" ItemStyle-Width="10%" />
-                        <asp:BoundField HeaderText="BatchNo" DataField="BatchNo" ItemStyle-Width="10%" />
-                        <asp:BoundField HeaderText="BagNo" DataField="BagNo" ItemStyle-Width="10%" />
-                        <asp:BoundField HeaderText="Weight" DataField="Weight" ItemStyle-Width="10%" />
-                         <asp:BoundField HeaderText="TempOC" DataField="TempOC" ItemStyle-Width="10%" />
-                        <asp:BoundField HeaderText="Fat" DataField="Fat" ItemStyle-Width="10%" />
-                         <asp:BoundField HeaderText="SNF" DataField="SNF" ItemStyle-Width="10%" />
-                        <asp:BoundField HeaderText="Acidity" DataField="Acidity" ItemStyle-Width="10%" />
-                        <asp:BoundField HeaderText="Moisture" DataField="Moisture" ItemStyle-Width="10%" />
-                         <asp:BoundField HeaderText="Sugar" DataField="Sugar" ItemStyle-Width="10%" />
-                        <asp:BoundField HeaderText="SolIndex" DataField="SolIndex" ItemStyle-Width="10%" />
-                         <asp:BoundField HeaderText="Coffetest" DataField="Coffetest" ItemStyle-Width="10%" />
-                        <asp:BoundField HeaderText="Particleontop" DataField="Particleontop" ItemStyle-Width="10%" />
-                        <asp:BoundField HeaderText="ParticleonBottom" DataField="ParticleonBottom" ItemStyle-Width="10%" />
-                        <asp:BoundField HeaderText="Sendiments" DataField="Sendiments" ItemStyle-Width="10%" />
-                        <asp:BoundField HeaderText="BulkDensity" DataField="BulkDensity" ItemStyle-Width="10%" />
-                         <asp:BoundField HeaderText="Scorchedparticle" DataField="Scorchedparticle" ItemStyle-Width="10%" />
-                        <asp:BoundField HeaderText="Wettability" DataField="Wettability" ItemStyle-Width="10%" />
-                        <asp:BoundField HeaderText="Dispersibility" DataField="Dispersibility" ItemStyle-Width="10%" />
-                        <asp:BoundField HeaderText="FreeFat" DataField="FreeFat" ItemStyle-Width="10%" />
-                         <asp:BoundField HeaderText="TotalPlatecount" DataField="TotalPlatecount" ItemStyle-Width="10%" />
-                        <asp:BoundField HeaderText="Coliform" DataField="Coliform" ItemStyle-Width="10%" />
-                         <asp:BoundField HeaderText="YestMould" DataField="YestMould" ItemStyle-Width="10%" />
-                        <asp:BoundField HeaderText="Ecoli" DataField="Ecoli" ItemStyle-Width="10%" />
-                        <asp:BoundField HeaderText="Salmonella" DataField="Salmonella" ItemStyle-Width="10%" />
-                        <asp:BoundField HeaderText="Saureus" DataField="Saureus" ItemStyle-Width="10%" />
-                        <asp:BoundField HeaderText="Anerobicsporecount" DataField="Anerobicsporecount" ItemStyle-Width="10%" />
-                         <asp:BoundField HeaderText="Listeriamonocytogen" DataField="Listeriamonocytogen" ItemStyle-Width="10%" />
-                              <asp:BoundField HeaderText="Username" DataField="Username" ItemStyle-Width="10%" />
-                         <asp:BoundField HeaderText="Remarks" DataField="Remarks" ItemStyle-Width="10%" />
-                        </Columns>
-                         </asp:GridView>
+                        <asp:GridView runat="server" ID="gvLab"
+                            AutoGenerateColumns="False" GridLines="Both" HeaderStyle-Wrap="false" Width="100%"
+                            CssClass="table table-striped" OnPreRender="gvLab_PreRender" HeaderStyle-HorizontalAlign="Center">
+                                                    <RowStyle HorizontalAlign="Center"  Width="100%"/>
+                            <Columns>
+                                <asp:BoundField DataField="SrNo" HeaderText="Sr No."/>
+                                <asp:BoundField DataField="Date" HeaderText="Date"/>
+                                <asp:BoundField DataField="TypeofPowder" HeaderText="Type of Powder"/>
+                                <asp:BoundField DataField="Time" HeaderText="Time"/>
+                                <asp:BoundField DataField="SampleId" HeaderText="Sample Id"/>
+                                <asp:BoundField DataField="BatchNo" HeaderText="Batch No"/>
+                                <asp:BoundField DataField="BagNo" HeaderText="Bag No"/>
+                                <asp:BoundField DataField="Weight" HeaderText="Weight"/>
+                                <asp:BoundField DataField="TempOC" HeaderText="Temp OC" />
+                                <asp:BoundField DataField="Fat" HeaderText="Fat"/>
+                                <asp:BoundField DataField="SNF" HeaderText="SNF"/>
+                                <asp:BoundField DataField="Acidity" HeaderText="Acidity"/>
+                                <asp:BoundField DataField="Moisture" HeaderText="Moisture" />
+                                <asp:BoundField DataField="Sugar" HeaderText="Sugar" />
+                                <asp:BoundField DataField="SolIndex" HeaderText="Sol Index" />
+                                <asp:BoundField DataField="Coffetest" HeaderText="Coffee test"/>
+                                <asp:BoundField DataField="Particleontop" HeaderText="Particle on top"/>
+                                <asp:BoundField DataField="ParticleonBottom" HeaderText="Particle on Bottom"/>
+                                <asp:BoundField DataField="Sendiments" HeaderText="Sendiments" />
+                                <asp:BoundField DataField="BulkDensity" HeaderText="Bulk Density" />
+                                <asp:BoundField DataField="Scorchedparticle" HeaderText="Scorched particle" />
+                                <asp:BoundField DataField="Wettability" HeaderText="Wettability" />
+                                <asp:BoundField DataField="Dispersibility" HeaderText="Dispersibility"/>
+                                <asp:BoundField DataField="FreeFat" HeaderText="Free Fat" />
+                                <asp:BoundField DataField="TotalPlatecount" HeaderText="Total Plate count" />
+                                <asp:BoundField DataField="Coliform" HeaderText="Coliform" />
+                                <asp:BoundField DataField="YestMould" HeaderText="Yeast & Mould" />
+                                <asp:BoundField DataField="Ecoli" HeaderText="E.coli" />
+                                <asp:BoundField DataField="Salmonella" HeaderText="Salmonella" />
+                                <asp:BoundField DataField="Saureus" HeaderText="Saureus" />
+                                <asp:BoundField DataField="Anerobicsporecount" HeaderText="Anerobic spore count" />
+                                <asp:BoundField DataField="Listeriamonocytogen" HeaderText="Listeria monocytogen"  />
+                                <asp:BoundField DataField="Username" HeaderText="Username" />
+                                <asp:BoundField DataField="Remarks" HeaderText="Remarks" />
+                            </Columns>
+                        </asp:GridView>
 
                     </div>
                 </div>
@@ -133,7 +138,7 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-       <script type="text/javascript">
+    <script type="text/javascript">
         var date = new Date();
         var end = new Date(date.getFullYear(), date.getMonth(), date.getDate());
         var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());

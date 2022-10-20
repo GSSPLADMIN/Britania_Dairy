@@ -1,8 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/MainMaster.Master" AutoEventWireup="true" CodeBehind="InventoryReport.aspx.cs" Inherits="Powder_MISProduct.ReportUI.Inventory" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-     <div id="breadcrumb">
+    <div id="breadcrumb">
         <ul class="breadcrumb">
             <li><i class="fa fa-home"></i><a href="../WebUI/DashBoard.aspx">Home</a></li>
             <li class="active">Inventory  Report</li>
@@ -14,11 +15,12 @@
                 <div class="row">
                     <div class="col-md-10" style="font-size: 24px;">
                         Inventory Report
+                   
                     </div>
                     <div class="col-md-2 right" id="divExport" runat="server">
                         <asp:LinkButton ID="imgPDFButton" runat="server" OnClick="imgPDFButton_Click" CssClass="btn btn-danger quick-btn"><i class="fa fa-file-pdf-o"></i></asp:LinkButton>
                         <asp:LinkButton ID="imgExcelButton" runat="server" OnClick="imgExcelButton_Click" CssClass="btn btn-success quick-btn"><i class="fa fa-file-excel-o"></i></asp:LinkButton>
-<%--                        <asp:LinkButton ID="imgWordButton" runat="server" OnClick="imgbtnWord_OnClick" CssClass="btn btn-info quick-btn"><i class="fa fa-file-word-o"></i></asp:LinkButton>--%>
+                        <%--                        <asp:LinkButton ID="imgWordButton" runat="server" OnClick="imgbtnWord_OnClick" CssClass="btn btn-info quick-btn"><i class="fa fa-file-word-o"></i></asp:LinkButton>--%>
                     </div>
                 </div>
             </div>
@@ -27,17 +29,21 @@
                     <div class="col-md-12">
                         <div class="col-md-3">
                             From Date :
+                       
                         </div>
                         <div class="col-md-2">
                             From Time :
+                       
                         </div>
                         <div class="col-md-3">
                             To Date :
+                       
                         </div>
                         <div class="col-md-2">
                             To Time :
+                       
                         </div>
-                        
+
                     </div>
                 </div>
                 <div class="row">
@@ -75,7 +81,7 @@
                             </div>
                         </div>
                         <div class="col-md-2">
-                           <asp:Button runat="server" ID="btnGo" Text="Go" CssClass="btn btn-primary pull-right" ValidationGroup="g1" OnClick="btnGo_Click" />
+                            <asp:Button runat="server" ID="btnGo" Text="Go" CssClass="btn btn-primary pull-right" ValidationGroup="g1" OnClick="btnGo_Click" />
 
                         </div>
                     </div>
@@ -83,22 +89,22 @@
                 <br />
                 <div class="row">
                     <div class="col-md-18" style="overflow: scroll">
-                         <asp:GridView runat="server" ID="gvInventory"
-                        AutoGenerateColumns="False" GridLines="Both" HeaderStyle-Wrap="false"
-                        HeaderStyle-Font-Size="Medium" CssClass="gvTheGrid striped" OnPreRender="gvInventory_PreRender">
-<%--                        <RowStyle HorizontalAlign="Center"  Width="100%"/>--%>
-                           <Columns>
-                            <asp:BoundField DataField="SrNo" HeaderText="Sr No." ItemStyle-Wrap="false" />
-                            <asp:BoundField DataField="Date" HeaderText="Date" ItemStyle-Wrap="false" />
-<%--                            <asp:BoundField DataField="Time" HeaderText="Time" ItemStyle-Wrap="false" />--%>
-                            <asp:BoundField DataField="Itemdesc" HeaderText="Itemdesc" ItemStyle-Wrap="false" />
-                            <asp:BoundField DataField="MakeType" HeaderText="MakeType" ItemStyle-Wrap="false" />
-                            <asp:BoundField DataField="BatchNumber" HeaderText="BatchNumber" ItemStyle-Wrap="false" />
-                            <asp:BoundField DataField="Quantity" HeaderText="Quantity" ItemStyle-Wrap="false" />
-                            <asp:BoundField DataField="Remarks" HeaderText="Remarks" ItemStyle-Wrap="false" />
-                         
-                        </Columns>
-                         </asp:GridView>
+                        <asp:GridView runat="server" ID="gvInventory"
+                            AutoGenerateColumns="False" GridLines="Both" HeaderStyle-Wrap="false" Width="100%" HeaderStyle-HorizontalAlign="Center"
+                            CssClass="table table-striped" OnPreRender="gvInventory_PreRender">
+                            <%--                        <RowStyle HorizontalAlign="Center"  Width="100%"/>--%>
+                            <Columns>
+                                <asp:BoundField DataField="SrNo" HeaderText="Sr No." />
+                                <asp:BoundField DataField="Date" HeaderText="Date" />
+                                <%--                            <asp:BoundField DataField="Time" HeaderText="Time" ItemStyle-Wrap="false" />--%>
+                                <asp:BoundField DataField="Itemdesc" HeaderText="Item" />
+                                <asp:BoundField DataField="MakeType" HeaderText="Make Type" />
+                                <asp:BoundField DataField="BatchNumber" HeaderText="Batch Number" />
+                                <asp:BoundField DataField="Quantity" HeaderText="Quantity" />
+                                <asp:BoundField DataField="Remarks" HeaderText="Remarks" />
+
+                            </Columns>
+                        </asp:GridView>
 
                     </div>
                 </div>

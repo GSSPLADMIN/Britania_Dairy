@@ -21,10 +21,17 @@ namespace Powder_MISProduct.ReportUI
 {
     public partial class CIP : System.Web.UI.Page
     {
+        #region Load page event
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                divExport.Visible = false;
+                txtFromDate.Text = DateTime.Today.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+                txtToDate.Text = DateTime.Today.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+            }
         }
+        #endregion
 
         #region PDFBackgroundHelper Event
         class PDFBackgroundHelper : PdfPageEventHelper
@@ -57,7 +64,7 @@ namespace Powder_MISProduct.ReportUI
 
                     if (this.iCount != 0)
                     {
-                        ColumnText.ShowTextAligned(cb, Element.ALIGN_LEFT, new Phrase(" PCIP LOG REPORT", FONT), 1190, 1665, 0);
+                        ColumnText.ShowTextAligned(cb, Element.ALIGN_LEFT, new Phrase("CIP Log Reprot C3F1", FONT), 1190, 1665, 0);
                     }
                     iCount = iCount + 1;
 
@@ -80,18 +87,22 @@ namespace Powder_MISProduct.ReportUI
         }
         #endregion
 
+        #region Export to PDF
         protected void imgPDFButton_Click(object sender, EventArgs e)
         {
             try
             {
                 string text = Session[ApplicationSession.OrganisationName].ToString();
                 string text1 = Session[ApplicationSession.OrganisationAddress].ToString();
-                string text2 = "CIP  REPORT";
+                string text2 = "CIP Log Report - C3F1";
 
                 using (StringWriter sw = new StringWriter())
                 {
                     using (HtmlTextWriter hw = new HtmlTextWriter(sw))
                     {
+                        DateTime dtfromDateTime = DateTime.ParseExact(txtFromDate.Text + " " + txtFromTime.Text, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                        DateTime dtToDateTime = DateTime.ParseExact(txtToDate.Text + " " + txtToTime.Text, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+
                         System.Text.StringBuilder sb = new StringBuilder();
                         sb.Append("<div align='center' style='font-size:16px;font-weight:bold;color:Black;'>");
                         sb.Append(text);
@@ -106,14 +117,16 @@ namespace Powder_MISProduct.ReportUI
                         sb.Append("</b></div>");
                         sb.Append("<br/>");
 
-                        string content = "<table style='display: table;width: 900px; clear:both;'> <tr> <th colspan='4' style='float: left;padding-left: 350px;'><div align='left'><strong>From Date: </strong>" + txtFromDate.Text + "</div></th>";
+                        string content = "<table style='display: table;width: 900px; clear:both;'> <tr> <th colspan='7'"
+                            + "style='float: left;padding-left: 275px;'><div align='left'><strong>From Date : </strong>" +
+                            dtfromDateTime + "</div></th>";
 
                         content += "<th style='float:left; padding-left:-180px;'></th>";
 
                         content += "<th style='float:left; padding-left:-210px;'></th>";
 
-                        content += "<th colspan='1' align='left' style=' float: left; padding-left:-200px;'><strong> To Date: </strong>" +
-                        txtToDate.Text + "</th>" +
+                        content += "<th colspan='1' align='left' style=' float: left; padding-left:-200px;'><strong> To DateTime: </strong>" +
+                        dtToDateTime + "</th>" +
                         "</tr></table>";
                         sb.Append(content);
                         sb.Append("<br/>");
@@ -122,7 +135,8 @@ namespace Powder_MISProduct.ReportUI
                         iTextSharp.text.Font fontHeader = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 18, iTextSharp.text.Font.BOLD);
 
 
-                        PdfPCell headerCell = new PdfPCell(new Phrase("Sr No"));
+
+                        PdfPCell headerCell = new PdfPCell(new Phrase("Sr. No."));
                         headerCell.Rowspan = 2;
                         headerCell.Colspan = 1;
                         headerCell.Padding = 5;
@@ -130,16 +144,6 @@ namespace Powder_MISProduct.ReportUI
                         headerCell.HorizontalAlignment = Element.ALIGN_CENTER;
                         headerCell.VerticalAlignment = Element.ALIGN_MIDDLE;
                         pdfPTable.AddCell(headerCell);
-
-                        PdfPCell headerCell1 = new PdfPCell(new Phrase("Date"));
-                        headerCell1.Rowspan = 2;
-                        headerCell1.Colspan = 1;
-                        headerCell1.Padding = 5;
-                        headerCell1.BorderWidth = 1.5f;
-                        headerCell1.HorizontalAlignment = Element.ALIGN_CENTER;
-                        headerCell1.VerticalAlignment = Element.ALIGN_MIDDLE;
-                        pdfPTable.AddCell(headerCell1);
-
 
                         PdfPCell headerCell2 = new PdfPCell(new Phrase("Line No."));
                         headerCell2.Rowspan = 2;
@@ -150,15 +154,6 @@ namespace Powder_MISProduct.ReportUI
                         headerCell2.VerticalAlignment = Element.ALIGN_MIDDLE;
                         pdfPTable.AddCell(headerCell2);
 
-                        PdfPCell headerCell3 = new PdfPCell(new Phrase("Route No"));
-                        headerCell3.Rowspan = 2;
-                        headerCell3.Colspan = 1;
-                        headerCell3.Padding = 5;
-                        headerCell3.BorderWidth = 1.5f;
-                        headerCell3.HorizontalAlignment = Element.ALIGN_CENTER;
-                        headerCell3.VerticalAlignment = Element.ALIGN_MIDDLE;
-                        pdfPTable.AddCell(headerCell3);
-
                         PdfPCell headerCell4 = new PdfPCell(new Phrase("Route Name"));
                         headerCell4.Rowspan = 2;
                         headerCell4.Colspan = 1;
@@ -168,15 +163,14 @@ namespace Powder_MISProduct.ReportUI
                         headerCell4.VerticalAlignment = Element.ALIGN_MIDDLE;
                         pdfPTable.AddCell(headerCell4);
 
-                        PdfPCell headerCell5 = new PdfPCell(new Phrase("Receipe"));
-                        headerCell5.Rowspan = 2;
-                        headerCell5.Colspan = 1;
-                        headerCell5.Padding = 5;
-                        headerCell5.BorderWidth = 1.5f;
-                        headerCell5.HorizontalAlignment = Element.ALIGN_CENTER;
-                        headerCell5.VerticalAlignment = Element.ALIGN_MIDDLE;
-                        pdfPTable.AddCell(headerCell5);
-
+                        PdfPCell headerCell1 = new PdfPCell(new Phrase("Date"));
+                        headerCell1.Rowspan = 2;
+                        headerCell1.Colspan = 1;
+                        headerCell1.Padding = 5;
+                        headerCell1.BorderWidth = 1.5f;
+                        headerCell1.HorizontalAlignment = Element.ALIGN_CENTER;
+                        headerCell1.VerticalAlignment = Element.ALIGN_MIDDLE;
+                        pdfPTable.AddCell(headerCell1);
 
                         PdfPCell headerCell6 = new PdfPCell(new Phrase("Start Time"));
                         headerCell6.Rowspan = 2;
@@ -187,26 +181,46 @@ namespace Powder_MISProduct.ReportUI
                         headerCell6.VerticalAlignment = Element.ALIGN_MIDDLE;
                         pdfPTable.AddCell(headerCell6);
 
-                        PdfPCell headerCell7 = new PdfPCell(new Phrase("Stop Time"));
-                        headerCell7.Rowspan = 2;
-                        headerCell7.Colspan = 1;
-                        headerCell7.Padding = 5;
-                        headerCell7.BorderWidth = 1.5f;
-                        headerCell7.HorizontalAlignment = Element.ALIGN_CENTER;
-                        headerCell7.VerticalAlignment = Element.ALIGN_MIDDLE;
-                        pdfPTable.AddCell(headerCell7);
-
-                        PdfPCell headerCell8 = new PdfPCell(new Phrase("Total Time"));
-                        headerCell8.Rowspan = 2;
-                        headerCell8.Colspan = 1;
-                        headerCell8.Padding = 5;
-                        headerCell8.BorderWidth = 1.5f;
-                        headerCell8.HorizontalAlignment = Element.ALIGN_CENTER;
-                        headerCell8.VerticalAlignment = Element.ALIGN_MIDDLE;
-                        pdfPTable.AddCell(headerCell8);
+                        //PdfPCell headerCell3 = new PdfPCell(new Phrase("Route No"));
+                        //headerCell3.Rowspan = 2;
+                        //headerCell3.Colspan = 1;
+                        //headerCell3.Padding = 5;
+                        //headerCell3.BorderWidth = 1.5f;
+                        //headerCell3.HorizontalAlignment = Element.ALIGN_CENTER;
+                        //headerCell3.VerticalAlignment = Element.ALIGN_MIDDLE;
+                        //pdfPTable.AddCell(headerCell3);
 
 
-                        PdfPCell headerCell9 = new PdfPCell(new Phrase("Flow"));
+
+                        PdfPCell headerCell5 = new PdfPCell(new Phrase("CIP Program No."));
+                        headerCell5.Rowspan = 2;
+                        headerCell5.Colspan = 1;
+                        headerCell5.Padding = 5;
+                        headerCell5.BorderWidth = 1.5f;
+                        headerCell5.HorizontalAlignment = Element.ALIGN_CENTER;
+                        headerCell5.VerticalAlignment = Element.ALIGN_MIDDLE;
+                        pdfPTable.AddCell(headerCell5);
+
+                        //PdfPCell headerCell7 = new PdfPCell(new Phrase("Stop Time"));
+                        //headerCell7.Rowspan = 2;
+                        //headerCell7.Colspan = 1;
+                        //headerCell7.Padding = 5;
+                        //headerCell7.BorderWidth = 1.5f;
+                        //headerCell7.HorizontalAlignment = Element.ALIGN_CENTER;
+                        //headerCell7.VerticalAlignment = Element.ALIGN_MIDDLE;
+                        //pdfPTable.AddCell(headerCell7);
+
+                        //PdfPCell headerCell8 = new PdfPCell(new Phrase("Total Time"));
+                        //headerCell8.Rowspan = 2;
+                        //headerCell8.Colspan = 1;
+                        //headerCell8.Padding = 5;
+                        //headerCell8.BorderWidth = 1.5f;
+                        //headerCell8.HorizontalAlignment = Element.ALIGN_CENTER;
+                        //headerCell8.VerticalAlignment = Element.ALIGN_MIDDLE;
+                        //pdfPTable.AddCell(headerCell8);
+
+
+                        PdfPCell headerCell9 = new PdfPCell(new Phrase("CIP Flow - rate (KLPH)"));
                         headerCell9.Rowspan = 2;
                         headerCell9.Colspan = 1;
                         headerCell9.Padding = 5;
@@ -224,10 +238,6 @@ namespace Powder_MISProduct.ReportUI
                         headerCell10.VerticalAlignment = Element.ALIGN_MIDDLE;
                         pdfPTable.AddCell(headerCell10);
 
-                     
-
-
-
                         PdfPCell headerCell12 = new PdfPCell(new Phrase("LYE RINSE"));
                         headerCell12.Rowspan = 1;
                         headerCell12.Colspan = 4;
@@ -237,15 +247,6 @@ namespace Powder_MISProduct.ReportUI
                         headerCell12.VerticalAlignment = Element.ALIGN_MIDDLE;
                         pdfPTable.AddCell(headerCell12);
 
-                        PdfPCell headerCell13 = new PdfPCell(new Phrase("ACID RINSE"));
-                        headerCell13.Rowspan = 1;
-                        headerCell13.Colspan = 4;
-                        headerCell13.Padding = 5;
-                        headerCell13.BorderWidth = 1.5f;
-                        headerCell13.HorizontalAlignment = Element.ALIGN_CENTER;
-                        headerCell13.VerticalAlignment = Element.ALIGN_MIDDLE;
-                        pdfPTable.AddCell(headerCell13);
-
                         PdfPCell headerCell14 = new PdfPCell(new Phrase("INTERMEDIATE RINSE"));
                         headerCell14.Rowspan = 1;
                         headerCell14.Colspan = 4;
@@ -254,6 +255,15 @@ namespace Powder_MISProduct.ReportUI
                         headerCell14.HorizontalAlignment = Element.ALIGN_CENTER;
                         headerCell14.VerticalAlignment = Element.ALIGN_MIDDLE;
                         pdfPTable.AddCell(headerCell14);
+
+                        PdfPCell headerCell13 = new PdfPCell(new Phrase("ACID RINSE"));
+                        headerCell13.Rowspan = 1;
+                        headerCell13.Colspan = 4;
+                        headerCell13.Padding = 5;
+                        headerCell13.BorderWidth = 1.5f;
+                        headerCell13.HorizontalAlignment = Element.ALIGN_CENTER;
+                        headerCell13.VerticalAlignment = Element.ALIGN_MIDDLE;
+                        pdfPTable.AddCell(headerCell13);
 
                         PdfPCell headerCell15 = new PdfPCell(new Phrase("FINAL RINSE"));
                         headerCell15.Rowspan = 1;
@@ -288,7 +298,7 @@ namespace Powder_MISProduct.ReportUI
 
                         /// Unit Field start from below
                         ///  ///----- Pre Rinse
-                        PdfPCell headerCell18 = new PdfPCell(new Phrase("Step Time"));
+                        PdfPCell headerCell18 = new PdfPCell(new Phrase("Total Step Time"));
                         headerCell18.Rowspan = 1;
                         headerCell18.Colspan = 1;
                         headerCell18.Padding = 5;
@@ -297,7 +307,7 @@ namespace Powder_MISProduct.ReportUI
                         headerCell18.VerticalAlignment = Element.ALIGN_MIDDLE;
                         pdfPTable.AddCell(headerCell18);
 
-                        PdfPCell headerCell11 = new PdfPCell(new Phrase("Effective Circulation time (Program Time)"));
+                        PdfPCell headerCell11 = new PdfPCell(new Phrase("Program Time"));
                         headerCell11.Rowspan = 1;
                         headerCell11.Colspan = 1;
                         headerCell11.Padding = 5;
@@ -307,7 +317,7 @@ namespace Powder_MISProduct.ReportUI
                         pdfPTable.AddCell(headerCell11);
 
                         ///  ///-----  Rinse with water
-                        PdfPCell headerCell19 = new PdfPCell(new Phrase("Cond(ms/cm)"));
+                        PdfPCell headerCell19 = new PdfPCell(new Phrase("Cond. (ms/cm)"));
                         headerCell19.Rowspan = 1;
                         headerCell19.Colspan = 1;
                         headerCell19.Padding = 5;
@@ -318,7 +328,7 @@ namespace Powder_MISProduct.ReportUI
 
 
                         ///  ///----- LYE Rinse
-                        PdfPCell headerCell20 = new PdfPCell(new Phrase("Step Time"));
+                        PdfPCell headerCell20 = new PdfPCell(new Phrase("Total Step Time"));
                         headerCell20.Rowspan = 1;
                         headerCell20.Colspan = 1;
                         headerCell20.Padding = 5;
@@ -328,7 +338,7 @@ namespace Powder_MISProduct.ReportUI
                         pdfPTable.AddCell(headerCell20);
 
                         ///----- LYE Rinse
-                        PdfPCell headerCell21 = new PdfPCell(new Phrase("LyeEffectiveCircuilationTime"));
+                        PdfPCell headerCell21 = new PdfPCell(new Phrase("Program Time"));
                         headerCell21.Rowspan = 1;
                         headerCell21.Colspan = 1;
                         headerCell21.Padding = 5;
@@ -337,7 +347,7 @@ namespace Powder_MISProduct.ReportUI
                         headerCell21.VerticalAlignment = Element.ALIGN_MIDDLE;
                         pdfPTable.AddCell(headerCell21);
 
-                        PdfPCell headerCell22 = new PdfPCell(new Phrase("Return Temp"));
+                        PdfPCell headerCell22 = new PdfPCell(new Phrase("Return Temp. (°C)"));
                         headerCell22.Rowspan = 1;
                         headerCell22.Colspan = 1;
                         headerCell22.Padding = 5;
@@ -358,7 +368,7 @@ namespace Powder_MISProduct.ReportUI
 
 
                         /// ACid Rinse
-                        PdfPCell headerCell24 = new PdfPCell(new Phrase("Step Time"));
+                        PdfPCell headerCell24 = new PdfPCell(new Phrase("Total Step Time"));
                         headerCell24.Rowspan = 1;
                         headerCell24.Colspan = 1;
                         headerCell24.Padding = 5;
@@ -367,7 +377,7 @@ namespace Powder_MISProduct.ReportUI
                         headerCell24.VerticalAlignment = Element.ALIGN_MIDDLE;
                         pdfPTable.AddCell(headerCell24);
 
-                        PdfPCell headerCell25 = new PdfPCell(new Phrase("AcidEffectiveCircuilationTime"));
+                        PdfPCell headerCell25 = new PdfPCell(new Phrase("Program Time"));
                         headerCell25.Rowspan = 1;
                         headerCell25.Colspan = 1;
                         headerCell25.Padding = 5;
@@ -376,7 +386,7 @@ namespace Powder_MISProduct.ReportUI
                         headerCell25.VerticalAlignment = Element.ALIGN_MIDDLE;
                         pdfPTable.AddCell(headerCell25);
 
-                        PdfPCell headerCell26 = new PdfPCell(new Phrase("Return Temp"));
+                        PdfPCell headerCell26 = new PdfPCell(new Phrase("Return Temp. (°C)"));
                         headerCell26.Rowspan = 1;
                         headerCell26.Colspan = 1;
                         headerCell26.Padding = 5;
@@ -385,7 +395,7 @@ namespace Powder_MISProduct.ReportUI
                         headerCell26.VerticalAlignment = Element.ALIGN_MIDDLE;
                         pdfPTable.AddCell(headerCell26);
 
-                   
+
                         PdfPCell headerCell27 = new PdfPCell(new Phrase("Return Cond."));
                         headerCell27.Rowspan = 1;
                         headerCell27.Colspan = 1;
@@ -397,7 +407,7 @@ namespace Powder_MISProduct.ReportUI
 
                         /// Intermediate
 
-                        PdfPCell headerCell28 = new PdfPCell(new Phrase("Step Time"));
+                        PdfPCell headerCell28 = new PdfPCell(new Phrase("Total Step Time"));
                         headerCell28.Rowspan = 1;
                         headerCell28.Colspan = 1;
                         headerCell28.Padding = 5;
@@ -407,7 +417,7 @@ namespace Powder_MISProduct.ReportUI
                         pdfPTable.AddCell(headerCell28);
 
 
-                        PdfPCell headerCell29 = new PdfPCell(new Phrase("INTERMEDIATEEffectiveCircuilationTime"));
+                        PdfPCell headerCell29 = new PdfPCell(new Phrase("Program Time"));
                         headerCell29.Rowspan = 1;
                         headerCell29.Colspan = 1;
                         headerCell29.Padding = 5;
@@ -416,7 +426,7 @@ namespace Powder_MISProduct.ReportUI
                         headerCell29.VerticalAlignment = Element.ALIGN_MIDDLE;
                         pdfPTable.AddCell(headerCell29);
 
-                        PdfPCell headerCell30 = new PdfPCell(new Phrase("Return Avg Temp"));
+                        PdfPCell headerCell30 = new PdfPCell(new Phrase("Return Temp. (°C)"));
                         headerCell30.Rowspan = 1;
                         headerCell30.Colspan = 1;
                         headerCell30.Padding = 5;
@@ -436,7 +446,7 @@ namespace Powder_MISProduct.ReportUI
 
                         /// FInal Rinse
 
-                        PdfPCell headerCell32 = new PdfPCell(new Phrase("Step Time"));
+                        PdfPCell headerCell32 = new PdfPCell(new Phrase("Total Step Time"));
                         headerCell32.Rowspan = 1;
                         headerCell32.Colspan = 1;
                         headerCell32.Padding = 5;
@@ -445,7 +455,7 @@ namespace Powder_MISProduct.ReportUI
                         headerCell32.VerticalAlignment = Element.ALIGN_MIDDLE;
                         pdfPTable.AddCell(headerCell32);
 
-                        PdfPCell headerCell33 = new PdfPCell(new Phrase("FinalEffectiveCircuilationTime"));
+                        PdfPCell headerCell33 = new PdfPCell(new Phrase("Program Time"));
                         headerCell33.Rowspan = 1;
                         headerCell33.Colspan = 1;
                         headerCell33.Padding = 5;
@@ -454,7 +464,7 @@ namespace Powder_MISProduct.ReportUI
                         headerCell33.VerticalAlignment = Element.ALIGN_MIDDLE;
                         pdfPTable.AddCell(headerCell33);
 
-                        PdfPCell headerCell34 = new PdfPCell(new Phrase("Return Avg Temp"));
+                        PdfPCell headerCell34 = new PdfPCell(new Phrase("Return Temp. (°C)"));
                         headerCell34.Rowspan = 1;
                         headerCell34.Colspan = 1;
                         headerCell34.Padding = 5;
@@ -474,7 +484,7 @@ namespace Powder_MISProduct.ReportUI
 
                         ////Sterilization 
 
-                        PdfPCell headerCell36 = new PdfPCell(new Phrase("Step Time"));
+                        PdfPCell headerCell36 = new PdfPCell(new Phrase("Total Step Time"));
                         headerCell36.Rowspan = 1;
                         headerCell36.Colspan = 1;
                         headerCell36.Padding = 5;
@@ -483,7 +493,7 @@ namespace Powder_MISProduct.ReportUI
                         headerCell36.VerticalAlignment = Element.ALIGN_MIDDLE;
                         pdfPTable.AddCell(headerCell36);
 
-                        PdfPCell headerCell37 = new PdfPCell(new Phrase("STERILIZATIONEffectiveCircuilationTime"));
+                        PdfPCell headerCell37 = new PdfPCell(new Phrase("Program Time"));
                         headerCell37.Rowspan = 1;
                         headerCell37.Colspan = 1;
                         headerCell37.Padding = 5;
@@ -492,7 +502,7 @@ namespace Powder_MISProduct.ReportUI
                         headerCell37.VerticalAlignment = Element.ALIGN_MIDDLE;
                         pdfPTable.AddCell(headerCell37);
 
-                        PdfPCell headerCell38 = new PdfPCell(new Phrase("Return Avg Temp"));
+                        PdfPCell headerCell38 = new PdfPCell(new Phrase("Return Temp. (°C)"));
                         headerCell38.Rowspan = 1;
                         headerCell38.Colspan = 1;
                         headerCell38.Padding = 5;
@@ -501,7 +511,7 @@ namespace Powder_MISProduct.ReportUI
                         headerCell38.VerticalAlignment = Element.ALIGN_MIDDLE;
                         pdfPTable.AddCell(headerCell38);
 
-                        PdfPCell headerCell39 = new PdfPCell(new Phrase("Return Cond"));
+                        PdfPCell headerCell39 = new PdfPCell(new Phrase("Return Cond. "));
                         headerCell39.Rowspan = 1;
                         headerCell39.Colspan = 1;
                         headerCell39.Padding = 5;
@@ -510,14 +520,16 @@ namespace Powder_MISProduct.ReportUI
                         headerCell39.VerticalAlignment = Element.ALIGN_MIDDLE;
                         pdfPTable.AddCell(headerCell39);
 
-
-
-                        float[] widthsTAS = { 80f, 120f, 120f, 120f, 120f,120f, 120f, 120f, 120f,120f,120f,
-                                              120f,120f,120f,120f,120f,120f,120f,120f,120f,120f,
-                                              120f,120f,120f,120f,120f,120f,120f,120f,120f,120f,120f,120f,120f
-
-                        };
-                        pdfPTable.SetWidths(widthsTAS);
+                        //float[] widthsTAS = {
+                        //    50f, 110f, 90f, 70f, 90f,
+                        //    90f, 90f, 110f, 110f, 80f,
+                        //    90f, 90f, 80f, 120f, 120f,
+                        //    70f, 70f, 70f, 70f, 110f,//CAl-1
+                        //    110f, 110f, 80f, 90f, 90f,
+                        //    90f, 90f, 80f, 110f, 90f,
+                        //    90f, 90f, 80f, 90f, 90f,90f
+                        //};
+                        //pdfPTable.SetWidths(widthsTAS);
 
 
 
@@ -559,6 +571,7 @@ namespace Powder_MISProduct.ReportUI
                             pdfPTable.HeaderRows = 2;
                         }
 
+                        //var imageURL = Request.Url.GetLeftPart(UriPartial.Authority) + "/images/Logo1.gif";
                         var imageURL = Request.Url.GetLeftPart(UriPartial.Authority) + (new CommonClass().SetLogoPath());
                         var imageURL1 = Request.Url.GetLeftPart(UriPartial.Authority) + (new CommonClass().SetLogoPath1());
 
@@ -567,15 +580,16 @@ namespace Powder_MISProduct.ReportUI
 
 
                         jpg.Alignment = Element.ALIGN_CENTER;
-                        jpg.SetAbsolutePosition(35, 720);
-                        //jpg.SetAbsolutePosition(80, 1560);
+                        //jpg.SetAbsolutePosition(30, 1075);
+                        jpg.SetAbsolutePosition(80, 1560);
 
                         jpg1.Alignment = Element.ALIGN_RIGHT;
-                        jpg1.SetAbsolutePosition(1000, 700);
+                        jpg1.SetAbsolutePosition(2050, 1530);
+
                         StringReader sr = new StringReader(sb.ToString());
 
-                        Document pdfDoc = new Document(iTextSharp.text.PageSize.A1, -120f, -120f, 40f, 30f);
-                        pdfDoc.SetPageSize(iTextSharp.text.PageSize.A3.Rotate());
+                        Document pdfDoc = new Document(iTextSharp.text.PageSize.A1.Rotate(), -200f, -200f, 40f, 30f);
+
                         HTMLWorker htmlparser = new HTMLWorker(pdfDoc);
                         PdfWriter writer = PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
                         PDFBackgroundHelper pageEventHelper = new PDFBackgroundHelper();
@@ -602,7 +616,7 @@ namespace Powder_MISProduct.ReportUI
                         pdfDoc.Close();
                         Response.ContentType = "application/pdf";
 
-                        Response.AddHeader("content-disposition", "attachment;" + "filename=PCIPLogReport" + DateTime.Now.Date.ToString("dd-MM-yyyy") + ".pdf");
+                        Response.AddHeader("content-disposition", "attachment;" + "filename=CIP_Log_Report_C3F1_" + DateTime.Now.Date.ToString("dd-MM-yyyy") + "_" + DateTime.Now.ToString("HH:mm:ss") + ".pdf");
                         Response.Cache.SetCacheability(HttpCacheability.NoCache);
                         Response.Write(pdfDoc);
                         Response.Flush();
@@ -614,12 +628,13 @@ namespace Powder_MISProduct.ReportUI
             }
             catch (Exception ex)
             {
-              //  log.Error("Error", ex);
+                // log.Error("Error", ex);
                 ClientScript.RegisterStartupScript(typeof(Page), "MessagePopUp",
                     "<script>alert('Oops! There is some technical Problem. Contact to your Administrator.');</script>");
             }
 
         }
+        #endregion
 
         #region VerifyRenderingInServerForm
         public override void VerifyRenderingInServerForm(Control control)
@@ -632,43 +647,182 @@ namespace Powder_MISProduct.ReportUI
         {
             try
             {
-                string text = Session[ApplicationSession.OrganisationName].ToString();
-                string text1 = Session[ApplicationSession.OrganisationAddress].ToString();
-                string text2 = "CIP Log REPORT";
-                string filename = "CIP Log REPORT" + DateTime.Now.Date.ToString("dd-MM-yyyy") + ".xls";
-                Response.AddHeader("content-disposition", "attachment;filename=" + filename);
-                //Response.AddHeader("content-disposition", "attachment;filename=WeighbridgeSummaryReport.xls");
-                Response.Charset = "";
+                int count = 0;
+                Response.Clear();
+                Response.Buffer = true;
                 Response.ContentType = "application/vnd.ms-excel";
+                Response.ContentEncoding = System.Text.Encoding.Unicode;
+                Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
+                string filename = "CIP_Log_Report_C3F1_" + DateTime.Now.Date.ToString("dd-MM-yyyy") + "_" + DateTime.Now.ToString("HH:mm:ss") + ".xls";
+                Response.AddHeader("content-disposition", "attachment;filename=" + filename);
+                Response.Cache.SetCacheability(HttpCacheability.NoCache);
+
                 StringWriter sw = new StringWriter();
                 HtmlTextWriter hw = new HtmlTextWriter(sw);
                 gvCIPReport.AllowPaging = false;
-                gvCIPReport.RenderControl(hw);
-                string strTitle = text;
-                string Date = DateTime.UtcNow.AddHours(5.5).ToString();
-                string strSubTitle = text2 + "</br>";
-                //string strPath = Request.Url.GetLeftPart(UriPartial.Authority) + "/images/Logo1.gif";
-                string strPath = Request.Url.GetLeftPart(UriPartial.Authority) + (new CommonClass().SetLogoPath());
-                string strPath1 = Request.Url.GetLeftPart(UriPartial.Authority) + (new CommonClass().SetLogoPath1());
+                gvCIPReport.GridLines = GridLines.Both;
+                foreach (TableCell cell in gvCIPReport.HeaderRow.Cells)
+                {
+                    cell.BackColor = gvCIPReport.HeaderStyle.BackColor;
+                    count++;
+                }
 
-                string content = "<div align='left' style='font-family:verdana;font-size:16px'><img width='100' height='100' src='" + strPath + "'/></div><div align='center' style='font-family:verdana;font-size:16px;style='text-align:center'><img width='100' height='100' src='" + strPath1 + "'/></div><div align='center' style='font-family:verdana;font-size:16px'><span style='font-size:16px;font-weight:bold;color:Black;'>" + Session[ApplicationSession.OrganisationName] +
-                       "</span><br/><span style='font-size:13px;font-weight:bold;color:Black;'>" + Session[ApplicationSession.OrganisationAddress] + "</span><br/>" +
-                          "<span align='center' style='font-family:verdana;font-size:13px'><strong>" + strSubTitle + "</strong></span><br/>" +
-                          "<div align='center' style='font-family:verdana;font-size:12px'><strong>From Date :</strong>" +
-                      DateTime.ParseExact(txtFromDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture) +
-                       "&nbsp;&nbsp;&nbsp;&nbsp;<strong> To Date :</strong>" +
-                       DateTime.ParseExact(txtToDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture) +
-                       "</div><br/> "
-                       + sw.ToString() + "<br/></div>";
+                // colh for set colspan for Ornanisation Name, Adress and Report Name
+                // cold for set colspan  for Date
+                int colh, cold;
+                int temp = 0;
+                string strTh = string.Empty;
+
+                if (count <= 9)
+                {
+                    temp = 9 - count;
+                    count = count + temp;
+                    if (temp > 1)
+                    {
+                        temp = 1;
+                    }
+                    for (int i = 0; i < temp; i++)
+                    {
+                        strTh = strTh + "<th></th>";
+                    }
+
+                }
+
+                colh = count - 4;
+                cold = count - 8;
+
+
+                foreach (GridViewRow row in gvCIPReport.Rows)
+                {
+
+                    row.BackColor = System.Drawing.Color.White;
+                    foreach (TableCell cell in row.Cells)
+                    {
+                        if (row.RowIndex % 2 == 0)
+                        {
+                            cell.BackColor = gvCIPReport.AlternatingRowStyle.BackColor;
+                        }
+                        else
+                        {
+                            cell.BackColor = gvCIPReport.RowStyle.BackColor;
+                        }
+                        cell.CssClass = "textmode";
+                        cell.HorizontalAlign = HorizontalAlign.Center;
+                        List<Control> controls = new List<Control>();
+
+                        //Add controls to be removed to Generic List
+                        foreach (Control control in cell.Controls)
+                        {
+                            controls.Add(control);
+                        }
+
+                        //Loop through the controls to be removed and replace then with Literal
+                        foreach (Control control in controls)
+                        {
+                            switch (control.GetType().Name)
+                            {
+                                case "HyperLink":
+                                    cell.Controls.Add(new Literal { Text = (control as HyperLink).Text });
+                                    break;
+                                case "TextBox":
+                                    cell.Controls.Add(new Literal { Text = (control as TextBox).Text });
+                                    break;
+                                case "LinkButton":
+                                    cell.Controls.Add(new Literal { Text = (control as LinkButton).Text });
+                                    break;
+                                case "CheckBox":
+                                    cell.Controls.Add(new Literal { Text = (control as CheckBox).Text });
+                                    break;
+                                case "RadioButton":
+                                    cell.Controls.Add(new Literal { Text = (control as RadioButton).Text });
+                                    break;
+                            }
+                            cell.Controls.Remove(control);
+                        }
+                    }
+                }
+
+
+                gvCIPReport.RenderControl(hw);
+                string strSubTitle = "CPL Log Report C3F1";
+
+                string imageURL = Request.Url.GetLeftPart(UriPartial.Authority) + (new CommonClass().SetLogoPath());
+                string imageURL1 = Request.Url.GetLeftPart(UriPartial.Authority) + (new CommonClass().SetLogoPath1());
+
+                string content = "<div align='center' style='font-family:verdana;font-size:16px; width:800px;'>" +
+                  "<table style='display: table; width: 800px; clear:both;'>" +
+                  "<tr> </tr>" +
+                  "<tr><th></th><th><img height='90' width='120' src='" + imageURL1 + "'/></th>" +
+                   strTh +
+                  "<th colspan='" + colh + "' style='width: 600px; float: left; font-weight:bold;font-size:16px;'>" + Session[ApplicationSession.OrganisationName] + strTh +
+                  "<th><img  height= '80' width= '100' src='" + imageURL + "'/></th>" +
+                     "</tr>" +
+                     "<tr><th colspan='2'>'" + strTh + "'</th><th colspan='" + colh + "' style='font-size:13px;font-weight:bold;color:Black;'>" + Session[ApplicationSession.OrganisationAddress] + "</th></tr>" +
+                     "<tr><th colspan='2'>'" + strTh + "'</th><th colspan='" + colh + "'></th></tr>" +
+                     "<tr><th colspan='2'>'" + strTh + "'</th><th colspan='" + colh + "' style='font-size:22px;color:Maroon;'><b>" + strSubTitle + "</b></th></tr>" +
+                     "<tr></tr>" +
+                     "<tr><th colspan='4' align='left' style='width: 200px; float: left;'><strong> From Date&Time : </strong>" +
+                (DateTime.ParseExact(txtFromDate.Text + " " + txtFromTime.Text, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture)).ToString() + "</th>" +
+                "<th colspan='" + cold + "'></th>" + strTh + strTh +
+                "<th colspan = '4' align = 'right' style = 'width: 200px; float: right;'><strong> To Date&Time : </strong>" +
+                            (DateTime.ParseExact(txtToDate.Text + " " + txtToTime.Text, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture)).ToString() + "</th></tr>" +
+                "</table>" +
+
+                      "<br/>" + sw.ToString() + "<br/></div>";
+
+                string style = @"<!--mce:2-->";
+                Response.Write(style);
                 Response.Output.Write(content);
                 Response.Flush();
+                Response.Clear();
                 Response.End();
+
             }
             catch (Exception ex)
             {
-                // log.Error("Button EXCEL", ex);
+                //log.Error("Button EXCEL", ex);
                 ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Oops! There is some technical issue. Please Contact to your administrator.');", true);
             }
+
+            //try
+            //{
+            //    string text = Session[ApplicationSession.OrganisationName].ToString();
+            //    string text1 = Session[ApplicationSession.OrganisationAddress].ToString();
+            //    string text2 = "CIP Log REPORT";
+            //    string filename = "CIP Log REPORT" + DateTime.Now.Date.ToString("dd-MM-yyyy") + ".xls";
+            //    Response.AddHeader("content-disposition", "attachment;filename=" + filename);
+            //    //Response.AddHeader("content-disposition", "attachment;filename=WeighbridgeSummaryReport.xls");
+            //    Response.Charset = "";
+            //    Response.ContentType = "application/vnd.ms-excel";
+            //    StringWriter sw = new StringWriter();
+            //    HtmlTextWriter hw = new HtmlTextWriter(sw);
+            //    gvCIPReport.AllowPaging = false;
+            //    gvCIPReport.RenderControl(hw);
+            //    string strTitle = text;
+            //    string Date = DateTime.UtcNow.AddHours(5.5).ToString();
+            //    string strSubTitle = text2 + "</br>";
+            //    //string strPath = Request.Url.GetLeftPart(UriPartial.Authority) + "/images/Logo1.gif";
+            //    string strPath = Request.Url.GetLeftPart(UriPartial.Authority) + (new CommonClass().SetLogoPath());
+            //    string strPath1 = Request.Url.GetLeftPart(UriPartial.Authority) + (new CommonClass().SetLogoPath1());
+
+            //    string content = "<div align='left' style='font-family:verdana;font-size:16px'><img width='100' height='100' src='" + strPath + "'/></div><div align='center' style='font-family:verdana;font-size:16px;style='text-align:center'><img width='100' height='100' src='" + strPath1 + "'/></div><div align='center' style='font-family:verdana;font-size:16px'><span style='font-size:16px;font-weight:bold;color:Black;'>" + Session[ApplicationSession.OrganisationName] +
+            //           "</span><br/><span style='font-size:13px;font-weight:bold;color:Black;'>" + Session[ApplicationSession.OrganisationAddress] + "</span><br/>" +
+            //              "<span align='center' style='font-family:verdana;font-size:13px'><strong>" + strSubTitle + "</strong></span><br/>" +
+            //              "<div align='center' style='font-family:verdana;font-size:12px'><strong>From Date :</strong>" +
+            //          DateTime.ParseExact(txtFromDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture) +
+            //           "&nbsp;&nbsp;&nbsp;&nbsp;<strong> To Date :</strong>" +
+            //           DateTime.ParseExact(txtToDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture) +
+            //           "</div><br/> "
+            //           + sw.ToString() + "<br/></div>";
+            //    Response.Output.Write(content);
+            //    Response.Flush();
+            //    Response.End();
+            //}
+            //catch (Exception ex)
+            //{
+            //    // log.Error("Button EXCEL", ex);
+            //    ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Oops! There is some technical issue. Please Contact to your administrator.');", true);
+            //}
 
         }
 
@@ -682,20 +836,34 @@ namespace Powder_MISProduct.ReportUI
                   CultureInfo.InvariantCulture);
                 DateTime dtToDateTime = DateTime.ParseExact(txtToDate.Text + " " + txtToTime.Text, "dd/MM/yyyy HH:mm:ss",
                     CultureInfo.InvariantCulture);
-                objResult = objTransfer.CIPLogReport(dtFromDateTime, dtToDateTime);
-                if (objResult.ResultDt.Rows.Count > 0)
+
+                if (dtFromDateTime <= dtToDateTime)
                 {
-                    gvCIPReport.DataSource = objResult.ResultDt;
-                    gvCIPReport.DataBind();
-                    // imgWordButton.Visible = imgExcelButton.Visible = true;
-                    divNo.Visible = false;
+                    objResult = objTransfer.CIPLogReport(dtFromDateTime, dtToDateTime, 1);
+                    if (objResult.ResultDt.Rows.Count > 0)
+                    {
+                        gvCIPReport.DataSource = objResult.ResultDt;
+                        gvCIPReport.DataBind();
+                        // imgWordButton.Visible = imgExcelButton.Visible = true;
+                        divNo.Visible = false;
+                        divExport.Visible = true;
+                        gvCIPReport.Visible = true;
+                    }
+                    else
+                    {
+                        // imgWordButton.Visible = imgExcelButton.Visible = false;
+                        divNo.Visible = true;
+                        divExport.Visible = false;
+                        gvCIPReport.Visible = false;
+                        // ClientScript.RegisterStartupScript(typeof(Page), "MessagePopUp",
+                        //"<script>alert('No Record Found.');</script>");
+                    }
                 }
                 else
                 {
-                    // imgWordButton.Visible = imgExcelButton.Visible = false;
-                    divNo.Visible = true;
-                    // ClientScript.RegisterStartupScript(typeof(Page), "MessagePopUp",
-                    //"<script>alert('No Record Found.');</script>");
+                    gvCIPReport.Visible = false;
+                    ClientScript.RegisterStartupScript(typeof(Page), "MessagePopUp",
+                   "<script>alert('You cannot select From Date greater than To Date.');</script>");
                 }
             }
             catch (Exception ex)
@@ -704,16 +872,6 @@ namespace Powder_MISProduct.ReportUI
                 ClientScript.RegisterStartupScript(typeof(Page), "MessagePopUp",
                    "<script>alert('Oops! There is some technical Problem. Contact to your Administrator.');</script>");
             }
-
-        }
-
-        protected void gvCIPReport_PreRender(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void gvCIPReport_PreRender1(object sender, EventArgs e)
-        {
 
         }
 
@@ -730,24 +888,12 @@ namespace Powder_MISProduct.ReportUI
 
                     headerTableCell = new TableHeaderCell();
                     headerTableCell.RowSpan = 2;
-                    headerTableCell.Text = "Sr No";
-                    headerRow1.Controls.Add(headerTableCell);
-
-                    headerTableCell = new TableHeaderCell();
-                    headerTableCell.RowSpan = 2;
-                    headerTableCell.Text = "Date";
+                    headerTableCell.Text = "Sr. No.";
                     headerRow1.Controls.Add(headerTableCell);
 
                     headerTableCell = new TableHeaderCell();
                     headerTableCell.RowSpan = 2;
                     headerTableCell.Text = "Line No";
-                    headerRow1.Controls.Add(headerTableCell);
-
-
-
-                    headerTableCell = new TableHeaderCell();
-                    headerTableCell.RowSpan = 2;
-                    headerTableCell.Text = "Route No";
                     headerRow1.Controls.Add(headerTableCell);
 
                     headerTableCell = new TableHeaderCell();
@@ -757,7 +903,7 @@ namespace Powder_MISProduct.ReportUI
 
                     headerTableCell = new TableHeaderCell();
                     headerTableCell.RowSpan = 2;
-                    headerTableCell.Text = "Receipe";
+                    headerTableCell.Text = "Date";
                     headerRow1.Controls.Add(headerTableCell);
 
                     headerTableCell = new TableHeaderCell();
@@ -767,23 +913,27 @@ namespace Powder_MISProduct.ReportUI
 
                     headerTableCell = new TableHeaderCell();
                     headerTableCell.RowSpan = 2;
-                    headerTableCell.Text = "Stop Time";
+                    headerTableCell.Text = "CIP Program No.";
                     headerRow1.Controls.Add(headerTableCell);
+
+                    //headerTableCell = new TableHeaderCell();
+                    //headerTableCell.RowSpan = 2;
+                    //headerTableCell.Text = "Stop Time";
+                    //headerRow1.Controls.Add(headerTableCell);
+
+                    //headerTableCell = new TableHeaderCell();
+                    //headerTableCell.RowSpan = 2;
+                    //headerTableCell.Text = "Total Time";
+                    //headerRow1.Controls.Add(headerTableCell);
 
                     headerTableCell = new TableHeaderCell();
                     headerTableCell.RowSpan = 2;
-                    headerTableCell.Text = "Total Time";
-                    headerRow1.Controls.Add(headerTableCell);
-
-
-
-                    headerTableCell = new TableHeaderCell();
-                    headerTableCell.RowSpan = 2;
-                    headerTableCell.Text = "Flow";
+                    headerTableCell.Text = "CIP Flow-rate (KLPH)";
                     headerRow1.Controls.Add(headerTableCell);
 
                     headerTableCell = new TableHeaderCell();
                     headerTableCell.ColumnSpan = 3;
+                    headerTableCell.RowSpan = 1;
                     headerTableCell.Text = "PRE-RINSE";
                     headerTableCell.HorizontalAlign = HorizontalAlign.Center;
                     headerRow1.Controls.Add(headerTableCell);
@@ -797,30 +947,35 @@ namespace Powder_MISProduct.ReportUI
 
                     headerTableCell = new TableHeaderCell();
                     headerTableCell.ColumnSpan = 4;
+                    headerTableCell.RowSpan = 1;
                     headerTableCell.Text = "LYE RINSE";
                     headerTableCell.HorizontalAlign = HorizontalAlign.Center;
                     headerRow1.Controls.Add(headerTableCell);
 
                     headerTableCell = new TableHeaderCell();
                     headerTableCell.ColumnSpan = 4;
-                    headerTableCell.Text = "ACID RINSE";
-                    headerTableCell.VerticalAlign = VerticalAlign.Middle;
-                    headerRow1.Controls.Add(headerTableCell);
-
-                    headerTableCell = new TableHeaderCell();
-                    headerTableCell.ColumnSpan = 4;
+                    headerTableCell.RowSpan = 1;
                     headerTableCell.Text = "INTERMEDIATE RINSE";
                     headerTableCell.HorizontalAlign = HorizontalAlign.Center;
                     headerRow1.Controls.Add(headerTableCell);
 
                     headerTableCell = new TableHeaderCell();
                     headerTableCell.ColumnSpan = 4;
+                    headerTableCell.RowSpan = 1;
+                    headerTableCell.Text = "ACID RINSE";
+                    headerTableCell.VerticalAlign = VerticalAlign.Middle;
+                    headerRow1.Controls.Add(headerTableCell);
+
+                    headerTableCell = new TableHeaderCell();
+                    headerTableCell.ColumnSpan = 4;
+                    headerTableCell.RowSpan = 1;
                     headerTableCell.Text = "FINAL RINSE";
                     headerTableCell.HorizontalAlign = HorizontalAlign.Center;
                     headerRow1.Controls.Add(headerTableCell);
 
                     headerTableCell = new TableHeaderCell();
                     headerTableCell.ColumnSpan = 4;
+                    headerTableCell.RowSpan = 1;
                     headerTableCell.Text = "STERILIZATION";
                     headerTableCell.HorizontalAlign = HorizontalAlign.Center;
                     headerRow1.Controls.Add(headerTableCell);
@@ -883,41 +1038,36 @@ namespace Powder_MISProduct.ReportUI
                     headerCell24 = new TableHeaderCell();
                     headerCell25 = new TableHeaderCell();
 
-                    headerCell1.Text = "Step Time";
-                    headerCell2.Text = "EffectiveCirculationtime(Program Time)";
-                    headerCell3.Text = "Cond(ms/cm)";
+                    headerCell1.Text = "Total Step Time";
+                    headerCell2.Text = "Program Time";
+                    headerCell3.Text = "Cond. (ms/cm)";
 
-                    headerCell4.Text = "Step Time";
-                    headerCell5.Text = "EffectiveCirculationtime(Program Time)";
-                    headerCell6.Text = "Return Temp";
+                    headerCell4.Text = "Total Step Time";
+                    headerCell5.Text = "Program Time";
+                    headerCell6.Text = "Return Temp. (°C)";
                     headerCell7.Text = "Return Cond.";
 
-                    headerCell8.Text = "Step Time";
-                    headerCell9.Text = "EffectiveCirculationtime(Program Time)";
-                    headerCell10.Text = "Return Avg Temp";
+                    headerCell8.Text = "Total Step Time";
+                    headerCell9.Text = "Program Time";
+                    headerCell10.Text = "Return Temp. (°C)";
                     headerCell11.Text = "Return Cond.";
 
 
-                    headerCell12.Text = "Step Time";
-                    headerCell13.Text = "EffectiveCirculationtime(Program Time)";
-                    headerCell14.Text = "Return Avg Temp";
+                    headerCell12.Text = "Total Step Time";
+                    headerCell13.Text = "Program Time";
+                    headerCell14.Text = "Return Temp. (°C)";
                     headerCell15.Text = "Return Cond.";
 
-                    headerCell16.Text = "Step Time";
-                    headerCell17.Text = "EffectiveCirculationtime(Program Time)";
-                    headerCell18.Text = "Return Avg Temp";
+                    headerCell16.Text = "Total Step Time";
+                    headerCell17.Text = "Program Time";
+                    headerCell18.Text = "Return Temp. (°C)";
                     headerCell19.Text = "Return Cond.";
 
 
-                    headerCell20.Text = "Step Time";
-                    headerCell21.Text = "EffectiveCirculationtime(Program Time)";
-                    headerCell22.Text = "Return Avg Temp";
+                    headerCell20.Text = "Total Step Time";
+                    headerCell21.Text = "Program Time";
+                    headerCell22.Text = "Return Temp. (°C)";
                     headerCell23.Text = "Return Cond";
-
-
-
-
-
 
                     headerRow2.Controls.Add(headerCell1);
                     headerRow2.Controls.Add(headerCell2);
@@ -941,7 +1091,7 @@ namespace Powder_MISProduct.ReportUI
                     headerRow2.Controls.Add(headerCell20);
                     headerRow2.Controls.Add(headerCell21);
                     headerRow2.Controls.Add(headerCell22);
-                     headerRow2.Controls.Add(headerCell23);
+                    headerRow2.Controls.Add(headerCell23);
 
 
 
